@@ -11,4 +11,15 @@ RSpec.describe "User on root path", type: :feature do
       expect(page).to have_link(chatroom2.name)
     end
   end
+
+  it "can login via GitHub" do
+    page.visit root_path
+    user = mock_omniauth_user
+
+    page.within("#github-login") do
+      page.click_on "Login with GitHub"
+    end
+
+    expect(page).to have_content("Welcome #{user.name}!")
+  end
 end
