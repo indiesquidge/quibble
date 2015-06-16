@@ -1,6 +1,6 @@
 <div class="rooms">
   <% @rooms.each do |room| %>
-    <%= link_to room.name, root_path %>
+    <%= link_to room.name, room_path(room) %>
   <% end %>
 </div>
 

@@ -1,3 +1,18 @@
 <div id="room-show">
   <%= @room.name %>
 </div>
+
+<div id="recent-messages">
+  <% @messages.each do |message| %>
+    <%= message.body %>
+    <% end %>
+</div>
+
+<div id="new-message">
+  <%= form_for :message, url: messages_path do |f| %>
+    <%= f.label "Message Body:" %>
+    <%= f.text_field :body %>
+    <%= f.submit "Create message" %>
+  <% end %>
+
+</div>

@@ -12,6 +12,7 @@ gem "omniauth-github"
 gem "figaro"
 
 group :development, :test do
+  gem "launchy"
   gem "capybara"
   gem "rspec-rails"
   gem "pry-rails"

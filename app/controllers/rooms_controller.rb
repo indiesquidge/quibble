@@ -13,7 +13,8 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @messages = Message.all
+    @room = Room.find_by(slug: params[:slug])
   end
 
   private
