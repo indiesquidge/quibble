@@ -3,9 +3,9 @@ require 'rails_helper'
 describe "Authenticated User" do
   it "can add a chat room" do
     page.visit root_path
-#user = mock_omniauth_user
+    #user = mock_omniauth_user
 
-  #click_on "Login with GitHub"
+    #click_on "Login with GitHub"
     click_link_or_button "Create a new room"
 
     page.within("#new-room-form") do
@@ -18,5 +18,12 @@ describe "Authenticated User" do
     page.within("#room-show") do
       expect(page).to have_content("Testing Suite")
     end
+  end
+end
+
+describe "UnAuthenticated User" do
+  it "does not have the option to create a new room" do
+    page.visit root_path
+    expect(page).not_to have_content("Create a new room")
   end
 end

@@ -4,6 +4,6 @@
   <% end %>
 </div>
 
-<div>
+<% if current_user %>
   <%= link_to "Create a new room", new_room_path %>
-</div>
+<% end %>
