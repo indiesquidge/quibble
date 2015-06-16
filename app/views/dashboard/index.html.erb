@@ -1,0 +1,9 @@
+<div class="rooms">
+  <% @rooms.each do |room| %>
+    <%= link_to room.name, root_path %>
+  <% end %>
+</div>
+
+<% if current_user %>
+  <%= link_to "Create a new room", new_room_path %>
+<% end %>

@@ -1,0 +1,9 @@
+<nav>
+  <div id="github-login">
+    <% if current_user %>
+      <%= link_to "Logout", logout_path %>
+    <% else %>
+      <%= link_to "Login with GitHub", "/auth/github" %>
+    <% end %>
+  </div>
+</nav>
