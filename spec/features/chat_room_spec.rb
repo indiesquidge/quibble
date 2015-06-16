@@ -16,15 +16,4 @@ RSpec.describe "User in a chatroom", type: :feature do
       expect(page).to have_content(mes_4.body)
     end
   end
-
-  xit "can login via GitHub" do
-    page.visit root_path
-    user = mock_omniauth_user
-
-    page.within("#github-login") do
-      page.click_on "Login with GitHub"
-    end
-
-    expect(page).to have_content("Welcome #{user.name}!")
-  end
 end

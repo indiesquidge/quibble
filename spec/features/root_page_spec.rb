@@ -12,7 +12,7 @@ RSpec.describe "User on root path", type: :feature do
     end
   end
 
-  xit "can login via GitHub" do
+  it "can login via GitHub" do
     page.visit root_path
     user = mock_omniauth_user
 

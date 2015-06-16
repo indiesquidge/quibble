@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
 
   def show
     @messages = Message.all
-    @room = Room.find(params[:id])
+    @room = Room.find_by(slug: params[:slug])
   end
 
   private
