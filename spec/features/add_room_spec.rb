@@ -21,7 +21,7 @@ describe "Authenticated User" do
   end
 end
 
-describe "UnAuthenticated User" do
+describe "Unauthenticated User" do
   it "does not have the option to create a new room" do
     page.visit root_path
     expect(page).not_to have_content("Create a new room")
