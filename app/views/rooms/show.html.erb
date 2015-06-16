@@ -1,3 +1,9 @@
 <div id="room-show">
   <%= @room.name %>
 </div>
+
+<div id="recent-messages">
+  <% @messages.each do |message| %>
+    <%= message.body %>
+    <% end %>
+</div>

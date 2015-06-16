@@ -13,6 +13,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @messages = Message.all
     @room = Room.find(params[:id])
   end
 
