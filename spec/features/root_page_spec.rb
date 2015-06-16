@@ -1,5 +1,7 @@
 require "rails_helper"
 
+OmniAuth.config.test_mode = true
+
 RSpec.describe "User on root path", type: :feature do
   it "sees a list of available chatrooms" do
     chatroom1 = Room.create!(name: "room 1")
