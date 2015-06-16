@@ -22,6 +22,6 @@ RSpec.describe "User on root path", type: :feature do
       page.click_on "Login with GitHub"
     end
 
-    expect(page).to have_content("Welcome #{user.name}!")
+    expect(page).to have_content("Welcome #{user.info.nickname}!")
   end
 end
