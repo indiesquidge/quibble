@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616192524) do
+ActiveRecord::Schema.define(version: 20150616211921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,6 @@ ActiveRecord::Schema.define(version: 20150616192524) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "messages", "rooms"
-  add_foreign_key "messages", "users"
-
-  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "image_url"
@@ -48,4 +40,7 @@ ActiveRecord::Schema.define(version: 20150616192524) do
     t.string "provider"
     t.string "uid"
   end
+
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
 end
