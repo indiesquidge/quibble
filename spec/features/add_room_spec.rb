@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "Authenticated User" do
   it "can add a chat room" do
