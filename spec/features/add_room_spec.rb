@@ -9,10 +9,10 @@ describe "Authenticated User" do
     click_link_or_button "Create a new room"
 
     page.within("#new-room-form") do
-      expect(page).to have_content("Room title:")
+      expect(page).to have_content("Room name:")
     end
 
-    fill_in("room[title]", with: "testing suite")
+    fill_in("room[name]", with: "testing suite")
     click_on "Create room"
   end
 end
