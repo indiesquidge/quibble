@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
     room = Room.new(room_params)
     if room.save
       redirect_to room_path(room)
+      flash[:success] = "Your room has been created!"
     else
       flash[:error] = "An error prevented your room from being saved."
       redirect_to root_path
@@ -13,8 +14,8 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @messages = Message.all
     @room = Room.find_by(slug: params[:slug])
+    @messages = @room.messages
   end
 
   private
