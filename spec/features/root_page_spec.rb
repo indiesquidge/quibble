@@ -18,7 +18,7 @@ RSpec.describe "User on root path", type: :feature do
     page.visit root_path
     user = mock_omniauth_user
 
-    page.within("#github-login") do
+    page.within("#github-login .right") do
       page.click_on "Login with GitHub"
     end
 

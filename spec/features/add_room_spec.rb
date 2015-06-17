@@ -5,7 +5,9 @@ describe "Authenticated User" do
     page.visit root_path
     mock_omniauth_user
 
-    click_on "Login with GitHub"
+    within ".right" do
+      click_on "Login with GitHub"
+    end
     click_link_or_button "Create a new room"
 
     page.within("#new-room-form") do

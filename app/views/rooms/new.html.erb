@@ -1,7 +1,11 @@
-<div id="new-room-form">
-  <%= form_for :room, url: rooms_path do |f| %>
-    <%= f.label "Room name:" %>
-    <%= f.text_field :name %>
-    <%= f.submit "Create room" %>
-  <% end %>
+<div class="container">
+  <div id="new-room-form">
+    <div class="input-field col s6">
+      <%= form_for :room, url: rooms_path do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name, required: true %>
+        <%= f.submit "Create room", class: "btn" %>
+      <% end %>
+    </div>
+  </div>
 </div>

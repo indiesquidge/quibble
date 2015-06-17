@@ -1,9 +1,26 @@
-<div class="rooms">
-  <% @rooms.each do |room| %>
-    <%= link_to room.name, room_path(room) %>
-  <% end %>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="rooms">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th data-field="name">Room Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rooms.each do |room| %>
+            <tr>
+              <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<% if current_user %>
-  <%= link_to "Create a new room", new_room_path %>
-<% end %>
+  <div class="row">
+    <% if current_user %>
+      <%= link_to "Create a new room", new_room_path, class: "waves-effect waves-light btn" %>
+    <% end %>
+  </div>
+</div>
