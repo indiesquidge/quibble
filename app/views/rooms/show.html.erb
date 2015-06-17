@@ -12,6 +12,7 @@
   <%= form_for :message, url: messages_path do |f| %>
     <%= f.label "Message Body:" %>
     <%= f.text_field :body %>
+    <%= hidden_field_tag "room_id", @room.id %>
     <%= f.submit "Create message" %>
   <% end %>
 
