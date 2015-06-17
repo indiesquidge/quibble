@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore our compiled assets used in production
+public/assets
+
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
