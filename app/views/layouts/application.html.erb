@@ -14,7 +14,7 @@
 
     <div class="container">
       <% flash.each do |name, msg| %>
-        <div class="card-panel deep-purple lighten-5">
+        <div class="card-panel teal lighten-5">
           <%= content_tag :div, msg, id: "flash_#{name}" %>
         </div>
       <% end %>
