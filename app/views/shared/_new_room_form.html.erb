@@ -1,0 +1,15 @@
+<div class="container">
+<div id="new-room-form">
+  <div class="input-field col s6">
+    <%= form_for :room, url: rooms_path do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, required: true %>
+      <% if current_user %>
+        <%= f.submit "Create room", class: "btn" %>
+      <% else %>
+        <%= link_to "Login to create room", "/auth/github", class: "btn" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+</div>
