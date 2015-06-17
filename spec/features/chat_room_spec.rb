@@ -2,7 +2,9 @@ require "rails_helper"
 
 RSpec.describe "User in a chatroom", type: :feature do
   it "sees a list of recent messages" do
-    chatroom = Room.create!(name: "lonely")
+    chatroom = Room.new(name: "lonely")
+    chatroom.choices.build(title: "dj")
+    chatroom.save!
     mes_1 = chatroom.messages.create!(body: "Hey guys what's up")
     mes_2 = chatroom.messages.create!(body: "I'm so alone")
     mes_3 = chatroom.messages.create!(body: "I wish someone would join us.")
@@ -18,7 +20,10 @@ RSpec.describe "User in a chatroom", type: :feature do
   end
 
   it "can post a new message via form" do
-    room = Room.create!(name: "new_room")
+    room = Room.new(name: "new_room")
+    room.choices.build(title: "dj")
+    room.save!
+
     page.visit room_path(room)
 
     page.within("#recent-messages") do

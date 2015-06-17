@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def create
     room = Room.new(room_params)
+    room.choices.build(title: params[:room][:choice])
     if room.save
       redirect_to room_path(room)
       flash[:success] = "Your room has been created!"
