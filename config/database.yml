@@ -12,7 +12,10 @@ test:
   database: quibble_test
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: quibble_production
+  host: localhost
+  pool: 5
   username: quibble
   password: <%= ENV["QUIBBLE_DATABASE_PASSWORD"] %>
