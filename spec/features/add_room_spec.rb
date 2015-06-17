@@ -11,7 +11,7 @@ describe "Authenticated User" do
     click_link_or_button "Create a new room"
 
     page.within("#new-room-form") do
-      expect(page).to have_content("Room name:")
+      expect(page).to have_content("Name")
     end
 
     fill_in("room[name]", with: "Testing Suite")
