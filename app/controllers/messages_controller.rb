@@ -1,7 +1,9 @@
 class MessagesController < ApplicationController
   def create
-    message = Room.find_by(id: params[:room_id]).messages.new(message_params)
+    room = Room.find_by(id: params[:room_id])
+    message = Message.new(message_params)
     if message.save
+      room.messages << message
       flash[:success] = "Your message has sent!"
     else
       flash[:error] = "An error prevented your message from sending."
