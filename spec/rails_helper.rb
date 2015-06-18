@@ -5,6 +5,12 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+require 'database_cleaner'
+
+DatabaseCleaner.clean_with :truncation
+
+DatabaseCleaner.strategy = :transaction
+
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
 
