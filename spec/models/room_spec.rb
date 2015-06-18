@@ -16,17 +16,26 @@ RSpec.describe Room do
     expect(room.save).to be
     expect(room.choices.count).to eq(2)
   end
-  it "has three possible states" do
-    pending = Room.new(state: "pending")
-    active = Room.new(state: 1)
-    closed = Room.new(state: :closed)
 
-    expect(pending.state).to eq("pending")
-    expect(active.state).to eq("active")
-    expect(closed.state).to eq("closed")
-  end
+  context("state attribute") do
+    it "has three possible states" do
+      pending = Room.new(state: "pending")
+      active = Room.new(state: 1)
+      closed = Room.new(state: :closed)
 
-  it "has a default state of pending" do
-    expect(Room.new.state).to eq("pending")
+      expect(pending.state).to eq("pending")
+      expect(active.state).to eq("active")
+      expect(closed.state).to eq("closed")
+    end
+
+    it "has a default state of pending" do
+      expect(Room.new.state).to eq("pending")
+    end
+
+    it "has a display state for pretty factor" do
+      expect(Room.new.display_state).to eq("Pending")
+      expect(Room.new(state: "active").display_state).to eq("Active")
+      expect(Room.new(state: "closed").display_state).to eq("Closed")
+    end
   end
 end

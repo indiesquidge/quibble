@@ -13,4 +13,8 @@ class Room < ActiveRecord::Base
   def slug_it_up
     update!(slug: name.parameterize)
   end
+
+  def display_state
+    state.capitalize
+  end
 end

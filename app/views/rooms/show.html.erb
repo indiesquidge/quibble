@@ -1,6 +1,11 @@
 <div class="container">
   <div id="room-show">
-    <h2><%= @room.name %></h2>
+    <table>
+      <tr>
+        <th><h2><%= @room.name %></h2></th>
+        <th><h5><%= @room.display_state %></h5></th>
+      </tr>
+    </table>
   </div>
 
   <div class="row">
