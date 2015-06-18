@@ -3,7 +3,10 @@
     <table>
       <tr>
         <th><h2><%= @room.name %></h2></th>
-        <th><h5><%= @room.display_current_state %></h5></th>
+        <th>
+          <h5><%= @room.display_current_state %></h5>
+          <%= button_to "Close this Topic", room_path(@room), method: :put %>
+        </th>
       </tr>
     </table>
   </div>
