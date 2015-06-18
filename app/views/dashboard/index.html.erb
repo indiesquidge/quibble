@@ -1,28 +1,27 @@
-<div class="container">
-
-<% if current_user %>
-  <div id="new-room-form"></div>
-<% else %>
-  <%= link_to "Login to create room", "/auth/github", class: "submit btn" %>
-<% end %>
-
 <div class="row">
-  <div class="rooms">
-    <table class="striped">
-      <thead>
-        <tr>
-          <th data-field="name">Room Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @rooms.each do |room| %>
+  <% if current_user %>
+    <div id="new-room-form" class="container col s3"></div>
+  <% else %>
+    <%= link_to "Login to create room", "/auth/github", class: "submit btn" %>
+  <% end %>
+
+  <div class="container col s8">
+    <div class="rooms">
+      <table class="striped">
+        <thead>
           <tr>
-            <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
+            <th data-field="name">Room Name</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @rooms.each do |room| %>
+            <tr>
+              <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
 </div>
