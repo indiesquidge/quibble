@@ -155,6 +155,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    redis (3.2.1)
     ref (1.0.5)
     request_store (1.1.0)
     responders (2.1.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.1)
   responders
+  redis
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
