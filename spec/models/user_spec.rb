@@ -15,6 +15,7 @@ RSpec.describe User do
       }
     })
 
-    expect { User.find_or_create_from_auth(data) }.to change { User.count }.by(1)
+    user = User.find_or_create_from_auth(data)
+    expect(user).to be_valid
   end
 end
