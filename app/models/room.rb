@@ -12,7 +12,11 @@ class Room < ActiveRecord::Base
   end
 
   def slug_it_up
-    update!(slug: name.parameterize)
+    if name.parameterize.empty?
+      update!(slug: id.to_s)
+    else
+      update!(slug: name.parameterize)
+    end
   end
 
   def display_state
