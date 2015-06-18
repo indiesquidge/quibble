@@ -14,6 +14,7 @@ gem "execjs"
 gem "therubyracer"
 
 group :development, :test do
+  gem 'database_cleaner'
   gem "launchy"
   gem "capybara"
   gem "rspec-rails"
