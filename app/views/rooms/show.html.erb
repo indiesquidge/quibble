@@ -5,7 +5,9 @@
         <th><h2><%= @room.name %></h2></th>
         <th>
           <h5><%= @room.display_current_state %></h5>
-          <%= button_to "Close this Topic", room_path(@room), method: :put %>
+          <% if current_user == @room.user %>
+            <%= button_to "Close this Topic", room_path(@room), method: :put %>
+          <% end %>
         </th>
       </tr>
     </table>

@@ -25,28 +25,24 @@ describe "Room status" do
     end
   end
 
-  it "has a button for room creator to change status to closed" do
+  it "has a button for closing current topic which can only be used room creator" do
     page.visit root_path
-    user = mock_omniauth_user
+    mock_omniauth_user
 
     page.within("#github-login .right") do
       page.click_on "Login with GitHub"
     end
 
-    page.visit new_room_path
+    room = Room.create!(name: "Git Practices")
 
-    fill_in("room[name]", with: "Code Review Criteria")
-    click_on "Create room"
+    visit room_path(room)
 
-    page.within("#room-show") do
-      expect(page).to have_content("Active")
-    end
+    expect(page).not_to have_button("Close this Topic")
+
+    room.update(user_id: User.first.id)
+
+    visit room_path(room)
 
     expect(page).to have_button("Close this Topic")
-    click_on "Close this Topic"
-
-    page.within("#room-show") do
-      expect(page).to have_content("Closed")
-    end
   end
 end

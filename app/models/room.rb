@@ -3,6 +3,7 @@ class Room < ActiveRecord::Base
   has_many :messages, inverse_of: :room
   has_many :choices
   validates_presence_of :name, :choices
+  belongs_to :user, inverse_of: :rooms
 
   enum state: %w(pending active closed)
 
