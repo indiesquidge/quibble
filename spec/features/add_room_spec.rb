@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Authenticated User" do
-  it "can add a chat room" do
+  it "can add a chat room", js: true do
     page.visit root_path
     mock_omniauth_user
 

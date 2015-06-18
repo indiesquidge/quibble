@@ -37,7 +37,8 @@ function handleSubmit(e) {
       window.location = '/rooms/' + data.slug
     },
     error: function() {
-      $('#new-room-form').append('<p class="materialize-red darken-2">Something went wrong, inputs cannot be blank</p>');
+      $('#new-room-form').
+        append('<p class="materialize-red">Inputs cannot be blank</p>');
     },
   });
 }

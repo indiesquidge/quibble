@@ -13,6 +13,7 @@ gem "figaro"
 gem "execjs"
 gem "therubyracer"
 gem "responders"
+gem "poltergeist"
 
 group :development, :test do
   gem "launchy"
