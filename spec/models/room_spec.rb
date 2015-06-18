@@ -28,10 +28,6 @@ RSpec.describe Room do
       expect(closed.state).to eq("closed")
     end
 
-    it "has a default state of pending" do
-      expect(Room.new.state).to eq("pending")
-    end
-
     it "has a display state for pretty factor" do
       expect(Room.new.display_state).to eq("Pending")
       expect(Room.new(state: "active").display_state).to eq("Active")
