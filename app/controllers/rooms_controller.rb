@@ -12,14 +12,6 @@ class RoomsController < ApplicationController
     else
       head :bad_request
     end
-    # room.choices.build(title: params[:room][:choice])
-    # if room.save
-    #   redirect_to room_path(room)
-    #   flash[:success] = "Your room has been created!"
-    # else
-    #   flash[:error] = "An error prevented your room from being saved."
-    #   redirect_to root_path
-    # end
   end
 
   def show

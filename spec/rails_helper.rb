@@ -12,9 +12,9 @@ DatabaseCleaner.clean_with :truncation
 DatabaseCleaner.strategy = :transaction
 
 ActiveRecord::Migration.maintain_test_schema!
-Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
+  Capybara.javascript_driver = :selenium
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true

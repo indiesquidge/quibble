@@ -44,7 +44,7 @@ function handleSubmit(e) {
 }
 
 function buildInput(options) {
-  return '<input type="text" class="' + options.className + '" name= "room[' + options.className + ']"' +
+  return '<input type="text" class="' + options.className + '" id= "' + options.className + '"' +
          ' required="require" placeholder="' +
          options.placeholder + '">';
 }
