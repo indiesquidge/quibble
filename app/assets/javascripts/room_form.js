@@ -38,7 +38,7 @@ function handleSubmit(e) {
     },
     error: function() {
       $('#new-room-form').
-        append('<p class="materialize-red">Inputs cannot be blank</p>');
+        append('<p class="materialize-red lighten-1 error">Inputs cannot be blank</p>');
     },
   });
 }
