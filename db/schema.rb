@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150618180948) do
   create_table "choices", force: :cascade do |t|
     t.string  "title"
     t.integer "room_id"
-    t.boolean "chosen",  default: true
+    t.boolean "chosen",  default: false
   end
 
   add_index "choices", ["room_id"], name: "index_choices_on_room_id", using: :btree
