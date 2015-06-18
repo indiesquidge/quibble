@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function formMarkup() {
-  return buildInput({ className: 'topic-field', placeholder: 'Topic: ex. testing, quotations, workflow' }) +
+  return '<h5>New Room</h5>' + buildInput({ className: 'topic-field', placeholder: 'Topic: ex. testing, quotations, workflow' }) +
     buildInput({ className: 'choice-field', placeholder: 'Choice: ex. rspec, minitest, mrspec' }) +
     '<button type="submit" class="room-submit btn">Create Room</button>';
 }
