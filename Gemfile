@@ -13,7 +13,7 @@ gem "figaro"
 gem "execjs"
 gem "therubyracer"
 gem "responders"
-gem "poltergeist"
+gem "capybara-webkit"
 
 group :development, :test do
   gem "launchy"

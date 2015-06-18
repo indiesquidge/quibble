@@ -8,7 +8,7 @@ describe "Room" do
     expect(room.save).to be
   end
 
-  it "must have at least one choice" do
+  it "must have at least one choice", js: true do
     room = Room.new(name: "test")
     expect(room).not_to be_valid
     room.choices.build(title: "some trivial choice")
