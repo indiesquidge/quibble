@@ -4,6 +4,8 @@ class Room < ActiveRecord::Base
   has_many :choices
   validates_presence_of :name, :choices
 
+  enum state: %w(pending active closed)
+
   def to_param
     slug
   end

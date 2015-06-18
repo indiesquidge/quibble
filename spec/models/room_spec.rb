@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Room" do
+RSpec.describe Room do
   it "must have a name" do
     expect(Room.new).not_to be_valid
     room = Room.new(name: "my room")
@@ -15,5 +15,18 @@ describe "Room" do
     room.choices.build(title: "other trivial choice")
     expect(room.save).to be
     expect(room.choices.count).to eq(2)
+  end
+  it "has three possible states" do
+    pending = Room.new(state: "pending")
+    active = Room.new(state: 1)
+    closed = Room.new(state: :closed)
+
+    expect(pending.state).to eq("pending")
+    expect(active.state).to eq("active")
+    expect(closed.state).to eq("closed")
+  end
+
+  it "has a default state of pending" do
+    expect(Room.new.state).to eq("pending")
   end
 end
