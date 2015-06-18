@@ -26,4 +26,8 @@ class Room < ActiveRecord::Base
       display_state
     end
   end
+
+  def random_choice
+    choices.sample
+  end
 end
