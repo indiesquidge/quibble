@@ -1,4 +1,7 @@
 <div class="container">
+
+  <%= render partial: "shared/new_room_form" %>
+
   <div class="row">
     <div class="rooms">
       <table class="striped">
@@ -18,9 +21,4 @@
     </div>
   </div>
 
-  <div class="row">
-    <% if current_user %>
-      <%= link_to "Create a new room", new_room_path, class: "waves-effect waves-light btn" %>
-    <% end %>
-  </div>
 </div>

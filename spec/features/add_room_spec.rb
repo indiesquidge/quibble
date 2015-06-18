@@ -8,13 +8,9 @@ describe "Authenticated User" do
     within ".right" do
       click_on "Login with GitHub"
     end
-    click_link_or_button "Create a new room"
-
-    page.within("#new-room-form") do
-      expect(page).to have_content("Name")
-    end
 
     fill_in("room[name]", with: "Testing Suite")
+    fill_in("room[choice]", with: "rspec")
     click_on "Create room"
 
     page.within("#room-show") do
@@ -24,8 +20,12 @@ describe "Authenticated User" do
 end
 
 describe "Unauthenticated User" do
-  it "does not have the option to create a new room" do
+  it "must login before creating a new room" do
     page.visit root_path
-    expect(page).not_to have_content("Create a new room")
+    expect(page).to have_content("Login to create room")
+    fill_in("room[name]", with: "testing")
+    fill_in("room[choice]", with: "rspec")
+    click_on("Login to create room")
+    expect(page).to have_content("Create New Room")
   end
 end

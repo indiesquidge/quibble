@@ -4,8 +4,12 @@ OmniAuth.config.test_mode = true
 
 RSpec.describe "User on root path", type: :feature do
   it "sees a list of available chatrooms" do
-    chatroom1 = Room.create!(name: "room 1")
-    chatroom2 = Room.create!(name: "room 2")
+    chatroom1 = Room.new(name: "room 1")
+    chatroom1.choices.build(title: "austin")
+    chatroom2 = Room.new(name: "room 2")
+    chatroom2.choices.build(title: "dj")
+    chatroom2.save!
+    chatroom1.save!
 
     page.visit root_path
     page.within(".rooms") do

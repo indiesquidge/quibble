@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+bundle/*
 
 # Ignore our compiled assets used in production
 public/assets
