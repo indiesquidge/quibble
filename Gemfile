@@ -12,6 +12,7 @@ gem "omniauth-github"
 gem "figaro"
 gem "execjs"
 gem "therubyracer"
+gem "responders"
 
 group :development, :test do
   gem "launchy"

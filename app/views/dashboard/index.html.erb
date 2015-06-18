@@ -1,24 +1,29 @@
 <div class="container">
 
-  <%= render partial: "shared/new_room_form" %>
-
-  <div class="row">
-    <div class="rooms">
-      <table class="striped">
-        <thead>
-          <tr>
-            <th data-field="name">Room Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rooms.each do |room| %>
-            <tr>
-              <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<% if current_user %>
+  <div id="new-room-form">
   </div>
+<% else %>
+  <p>Login to create a new room</p>
+<% end %>
+
+<div class="row">
+  <div class="rooms">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th data-field="name">Room Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rooms.each do |room| %>
+          <tr>
+            <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 </div>
