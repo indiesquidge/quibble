@@ -17,4 +17,12 @@ class Room < ActiveRecord::Base
   def display_state
     state.capitalize
   end
+
+  def display_current_state
+    if state == "pending"
+      "Active"
+    else
+      display_state
+    end
+  end
 end

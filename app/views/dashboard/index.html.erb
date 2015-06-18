@@ -14,6 +14,7 @@
           <% @rooms.each do |room| %>
             <tr>
               <td><%= link_to room.name, room_path(room), class: "red-text text-lighten-1" %></td>
+              <td><%= room.display_state %></td>
             </tr>
           <% end %>
         </tbody>

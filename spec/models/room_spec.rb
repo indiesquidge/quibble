@@ -37,5 +37,14 @@ RSpec.describe Room do
       expect(Room.new(state: "active").display_state).to eq("Active")
       expect(Room.new(state: "closed").display_state).to eq("Closed")
     end
+
+    it "has a display state which changes depending on whether it is being viewed" do
+      pending = Room.new
+      active = Room.new(state: "active")
+      closed = Room.new(state: "closed")
+      expect(pending.display_current_state).to eq("Active")
+      expect(active.display_current_state).to eq("Active")
+      expect(closed.display_current_state).to eq("Closed")
+    end
   end
 end
