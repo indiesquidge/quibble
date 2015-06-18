@@ -19,6 +19,13 @@ class RoomsController < ApplicationController
     @messages = @room.messages
   end
 
+  def update
+    room = Room.find_by(slug: params[:slug])
+    room.update(state: "closed")
+
+    redirect_to :back
+  end
+
   private
 
   def room_params
