@@ -15,6 +15,7 @@ gem "therubyracer"
 gem "responders"
 gem 'selenium-webdriver', '~> 2.46.2'
 gem "draper"
+gem "redis"
 
 group :development, :test do
   gem 'database_cleaner'
