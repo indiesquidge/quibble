@@ -37,4 +37,36 @@ RSpec.describe "Room with choices" do
 
     expect(choice_after.chosen?).to eq(true)
   end
+
+  context "closed room" do
+    it "displays the chosen choice as green" do
+      room = Room.new(name: "Before blocks", state: "closed")
+      sad_choice = room.choices.build(title: "Yes")
+      happy_choice = room.choices.build(title: "No", chosen: true)
+      room.save
+
+      page.visit room_path(room)
+
+      within(".#{happy_choice.title}") do
+        happy_choice.chosen_display.split(" ").each do |css_class|
+          expect(page).to have_css(".#{css_class}")
+        end
+      end
+    end
+
+    it "displays non-chosen choices as red and strikeoutted" do
+      room = Room.new(name: "Before blocks", state: "closed")
+      sad_choice = room.choices.build(title: "Yes")
+      happy_choice = room.choices.build(title: "No", chosen: true)
+      room.save
+
+      page.visit room_path(room)
+
+      within(".#{sad_choice.title}") do
+        sad_choice.chosen_display.split(" ").each do |css_class|
+          expect(page).to have_css(".#{css_class}")
+        end
+      end
+    end
+  end
 end
