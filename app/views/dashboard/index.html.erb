@@ -1,10 +1,9 @@
 <div class="container">
 
 <% if current_user %>
-  <div id="new-room-form">
-  </div>
+  <div id="new-room-form"></div>
 <% else %>
-  <p>Login to create a new room</p>
+  <%= link_to "Login to create room", "/auth/github", class: "submit btn" %>
 <% end %>
 
 <div class="row">

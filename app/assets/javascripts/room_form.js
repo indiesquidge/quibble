@@ -8,8 +8,8 @@ $(document).ready(function() {
 });
 
 function formMarkup() {
-  return buildInput({ className: "topic-field", placeholder: "Topic: ex. testing, quotations, workflow" }) +
-    buildInput({ className: "choice-field", placeholder: "Choice: ex. rspec, minitest, mrspec" }) +
+  return buildInput({ className: 'topic-field', placeholder: 'Topic: ex. testing, quotations, workflow' }) +
+    buildInput({ className: 'choice-field', placeholder: 'Choice: ex. rspec, minitest, mrspec' }) +
     '<button type="submit" class="room-submit btn">Create Room</button>';
 }
 
@@ -29,27 +29,23 @@ function handleSubmit(e) {
   };
 
   $.ajax({
-    type: "POST",
-    url: "/rooms",
+    type: 'POST',
+    url: '/rooms',
     data: requestBody,
     dataType: 'json',
     success: function(data) {
-      window.location = "/rooms/" + data.slug
-    }
+      window.location = '/rooms/' + data.slug
+    },
+    error: function() {
+      $('#new-room-form').append('<p class="materialize-red darken-2">Something went wrong, inputs cannot be blank</p>');
+    },
   });
 }
 
-// TODO: Refactor raw text into better jquery syntax:
-// $( "<div/>", {
-//   "class": "test",
-//   text: "Click me!",
-//   click: function() {
-//     $( this ).toggleClass( "test" );
-//   }
-// });
 function buildInput(options) {
-  return '<input type="text" class="' + options.className +
-    '" required="require" placeholder="' + options.placeholder + '">';
+  return '<input type="text" class="' + options.className + '" name= "room[' + options.className + ']"' +
+         ' required="require" placeholder="' +
+         options.placeholder + '">';
 }
 
 function handleKeypress(e) {
@@ -66,7 +62,7 @@ function renderForm() {
 }
 
 function appendNewInput() {
-  var $input = $(buildInput({ className: "choice-field", placeholder: "Choice: ex. rspec, minitest, mrspec" }));
+  var $input = $(buildInput({ className: 'choice-field', placeholder: 'Choice: ex. rspec, minitest, mrspec' }));
   $input.on('keyup', handleKeypress);
   $input.insertBefore('.room-submit');
 }
