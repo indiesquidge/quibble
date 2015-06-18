@@ -7,7 +7,7 @@
             <th><h2><%= @room.name %></h2></th>
             <th>
               <h5><%= @room.display_current_state %></h5>
-              <% if current_user == @room.user %>
+              <% if current_user == @room.user && !@room.closed? %>
                 <%= button_to "Close this Topic", room_path(@room), method: :put %>
               <% end %>
             </th>
@@ -34,10 +34,15 @@
 
         <div class="col s12">
           <div id="new-message" class="input-field">
-            <%= form_for :message, url: messages_path do |f| %>
-              <%= f.text_field :body %>
-              <%= hidden_field_tag "room_id", @room.id %>
-              <%= f.submit "Create message", class: "btn" %>
+            <% if @room.closed? %>
+              <h4>This thread has been closed.</h4>
+              <h5>No new messages may be posted.</h5>
+            <% else %>
+              <%= form_for :message, url: messages_path do |f| %>
+                <%= f.text_field :body %>
+                <%= hidden_field_tag "room_id", @room.id %>
+                <%= f.submit "Create message", class: "btn" %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -45,7 +50,7 @@
     </div>
     <div class="col s4">
       <div id="choices">
-      <h3>Choices:</h3>
+        <h3>Choices:</h3>
         <% @room.choices.each do |choice| %>
           <div class="<%=choice.title%>">
             <% if @room.closed? %>
