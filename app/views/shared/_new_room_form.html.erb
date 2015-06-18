@@ -1,6 +1,7 @@
 <div class="container">
 <div id="new-room-form">
   <div class="input-field col s6">
+    <h5>Add a new topic room</h5>
     <%= form_for :room, url: rooms_path do |f| %>
       <%= f.text_field :name, required: true, placeholder: "Topic: ex. testing, quotations, workflow" %>
       <%= f.text_field :choice, placeholder: "Choice: ex. minitest, rspec, mrspec" %>
