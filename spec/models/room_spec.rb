@@ -23,12 +23,12 @@ RSpec.describe Room do
       expect(room.slug).to eq(room.id.to_s)
     end
 
-    it "uses parameterized name if at all possible" do
+    it "uses id if any parameterization fails" do
       room = Room.new(name: "†his is delicious π")
       room.choices.build(title: "Yes")
       room.choices.build(title: "or yes")
       room.slug_it_up
-      expect(room.slug).to eq("his-is-delicious")
+      expect(room.slug).to eq(room.id.to_s)
     end
   end
 

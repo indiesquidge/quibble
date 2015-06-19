@@ -12,10 +12,10 @@ class Room < ActiveRecord::Base
   end
 
   def slug_it_up
-    if name.parameterize.empty?
-      update!(slug: id.to_s)
-    else
+    if name.ascii_only?
       update!(slug: name.parameterize)
+    else
+      update!(slug: id.to_s)
     end
   end
 
