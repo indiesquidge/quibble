@@ -4,10 +4,7 @@ describe "Authenticated User" do
   it "can add a chat room", js: true do
     page.visit root_path
     mock_omniauth_user
-
     click_link_or_button "Login to create room"
-
-    expect(page).to have_content("Welcome")
 
     within "#new-room-form" do
       page.fill_in("topic-field", with: "Testing Suite")
@@ -18,6 +15,21 @@ describe "Authenticated User" do
     page.within("#room-show") do
       expect(page).to have_content("Testing Suite")
     end
+  end
+
+  it "clicks a button to add additional choice input fields", js: true do
+    page.visit root_path
+    mock_omniauth_user
+    click_link_or_button "Login to create room"
+
+    within "#new-room-form" do
+      page.fill_in("topic-field", with: "Testing Suite")
+      page.fill_in("choice-field", with: "rspec")
+      find(:css, "#add-input-field").click
+      input_count = all(".choice-field").count
+      expect(input_count).to eq(2)
+    end
+
   end
 end
 

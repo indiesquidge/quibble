@@ -11,3 +11,15 @@
   padding:40px;
 }
 
+td, tr{
+  text-align:center !important;
+}
+
+#choice-field-btn, .choice-field{
+  display:inline;
+}
+
+.choice-field{
+  width:80% !important;
+}
+

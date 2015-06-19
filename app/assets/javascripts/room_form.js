@@ -4,6 +4,7 @@ $(document).ready(function() {
   renderForm();
 
   $('.choice-field').on('keyup', handleKeypress);
+  $('#add-input-field').on('click', handleClick);
   $('.room-submit').on('click', handleSubmit);
 });
 
@@ -43,10 +44,11 @@ function handleSubmit(e) {
   });
 }
 
-function buildInput(options) {
-  return '<input type="text" class="' + options.className + '" id= "' + options.className + '"' +
-         ' required="require" placeholder="' +
-         options.placeholder + '">';
+function handleClick() {
+  if (!$('.choice-field').last().val()) {
+    return;
+  }
+  appendNewInput();
 }
 
 function handleKeypress(e) {
@@ -58,6 +60,19 @@ function handleKeypress(e) {
   }
 }
 
+function buildInput(options) {
+  var btn;
+
+  if (options.className === 'choice-field') {
+    btn = '<a class="btn" id="add-input-field">+</a>';
+  } else {
+    btn = ''
+  }
+  return '<div><input type="text" class="' + options.className + '" id= "' + options.className + '"' +
+         ' required="require" placeholder="' +
+         options.placeholder + '">' + btn + '</div>'
+}
+
 function renderForm() {
   $('#new-room-form').append(formMarkup());
 }
@@ -66,4 +81,6 @@ function appendNewInput() {
   var $input = $(buildInput({ className: 'choice-field', placeholder: 'Choice: ex. rspec, minitest, mrspec' }));
   $input.on('keyup', handleKeypress);
   $input.insertBefore('.room-submit');
+  $('#add-input-field').first().remove();
+  $('#add-input-field').on('click', handleClick);
 }
