@@ -68,7 +68,7 @@ function buildInput(options) {
   } else {
     btn = ''
   }
-  return '<div><input type="text" class="' + options.className + '" id= "' + options.className + '"' +
+  return '<div id="choice-field-section"><input type="text" class="' + options.className + '" id= "' + options.className + '"' +
          ' required="require" placeholder="' +
          options.placeholder + '">' + btn + '</div>'
 }

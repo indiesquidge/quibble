@@ -12,7 +12,11 @@ class Room < ActiveRecord::Base
   end
 
   def slug_it_up
-    update!(slug: name.parameterize)
+    if name.ascii_only?
+      update!(slug: name.parameterize)
+    else
+      update!(slug: id.to_s)
+    end
   end
 
   def display_state
@@ -25,5 +29,9 @@ class Room < ActiveRecord::Base
     else
       display_state
     end
+  end
+
+  def random_choice
+    choices.sample
   end
 end

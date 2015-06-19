@@ -8,7 +8,10 @@ class RoomsController < ApplicationController
     room = Room.new(room_params)
     params[:room][:choices].each { |choice| room.choices.build(title: choice) }
     if room.save
+      room.update!(user_id: current_user.id)
       respond_with room
+      # redirect_to room_path(room)
+      # flash[:success] = "Your room has been created!"
     else
       head :bad_request
     end
@@ -21,7 +24,8 @@ class RoomsController < ApplicationController
 
   def update
     room = Room.find_by(slug: params[:slug])
-    room.update(state: "closed")
+    room.update!(state: "closed")
+    room.random_choice.update!(chosen: true)
 
     redirect_to :back
   end
