@@ -1,9 +1,12 @@
+require_relative "../../lib/redis_config"
+
 class MessagesController < ApplicationController
   def create
     room = Room.find_by(id: params[:room_id])
     message = Message.new(message_params)
     if message.save
       room.messages << message
+      $redis.publish :quibble, room.to_json
       flash[:success] = "Your message has sent!"
     else
       flash[:error] = "An error prevented your message from sending."
