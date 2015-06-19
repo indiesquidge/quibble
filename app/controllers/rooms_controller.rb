@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
     room = Room.new(room_params)
     room.choices.build(title: params[:room][:choice])
     if room.save
+      room.update!(user_id: current_user.id)
       redirect_to room_path(room)
       flash[:success] = "Your room has been created!"
     else
@@ -21,7 +22,8 @@ class RoomsController < ApplicationController
 
   def update
     room = Room.find_by(slug: params[:slug])
-    room.update(state: "closed")
+    room.update!(state: "closed")
+    room.random_choice.update!(chosen: true)
 
     redirect_to :back
   end

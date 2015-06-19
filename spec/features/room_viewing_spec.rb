@@ -24,7 +24,7 @@ describe "Room status" do
   end
 
   it "changes to active when a user enters the room" do
-    room = Room.new(name: "Mocking Library")
+    room = Room.new(name: "Mocking Library", state: "pending")
     room.choices.build(title: "Rspec Mocks")
     room.choices.build(title: "Mocha")
     room.save

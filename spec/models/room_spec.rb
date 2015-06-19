@@ -5,7 +5,31 @@ RSpec.describe Room do
     expect(Room.new).not_to be_valid
     room = Room.new(name: "my room")
     room.choices.build(title: "trivial choice")
-    expect(room.save).to be
+    expect(room).to be_valid
+  end
+
+  context("slug attribute") do
+    it "parameterizes the name for the slug" do
+      room = Room.new(name: "hello world or poopin")
+      room.choices.build(title: "hello world")
+      room.slug_it_up
+      expect(room.slug).to eq("hello-world-or-poopin")
+    end
+
+    it "uses the id if name can't be parameterized" do
+      room = Room.new(name: "∂ƒ∆ƒ∆")
+      room.choices.build(title: "poopin")
+      room.slug_it_up
+      expect(room.slug).to eq(room.id.to_s)
+    end
+
+    it "uses id if any parameterization fails" do
+      room = Room.new(name: "†his is delicious π")
+      room.choices.build(title: "Yes")
+      room.choices.build(title: "or yes")
+      room.slug_it_up
+      expect(room.slug).to eq(room.id.to_s)
+    end
   end
 
   it "must have at least one choice" do
