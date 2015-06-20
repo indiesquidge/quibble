@@ -8,7 +8,7 @@ class CurrentUser < Draper::Decorator
                 h.logout_path,
                 method: :delete)
     else
-      h.link_to("Login with Github",
+      h.link_to("Login with GitHub",
                 "/auth/github",
                 method: :get)
     end
