@@ -1,6 +1,6 @@
 class CurrentUser < Draper::Decorator
+  decorates :user
   delegate_all
-
 
   def session_url
     if object
@@ -22,13 +22,14 @@ class CurrentUser < Draper::Decorator
       ""
     end
   end
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
 
+  def form_link(form)
+    if object
+      form.submit("Create room", class: "btn")
+    else
+      h.link_to("Login to create room",
+                "/auth/github",
+                class: "btn")
+    end
+  end
 end
