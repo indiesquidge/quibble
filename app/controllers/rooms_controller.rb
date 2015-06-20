@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   respond_to :json, :html
 
   def new
+    render "shared/_new_room_form"
   end
 
   def create
