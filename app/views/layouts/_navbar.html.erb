@@ -6,15 +6,11 @@
   <% end %>
   <div id="github-login" class="right-align">
     <ul class="right hide-on-med-and-down">
-      <% if current_user.object %>
-        <li><%= link_to "Create New Room", new_room_path %></li>
-      <% end %>
+      <li><%= current_user.create_room_url %></li>
       <li><%= current_user.session_url %></li>
     </ul>
     <ul class="side-nav" id="mobile-demo">
-      <% if current_user.object %>
-        <li><%= link_to "Create New Room", new_room_path %></li>
-      <% end %>
+      <li><%= current_user.create_room_url %></li>
       <li><%= current_user.session_url %></li>
     </ul>
   </div>

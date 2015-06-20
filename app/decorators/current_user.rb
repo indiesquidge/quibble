@@ -13,6 +13,15 @@ class CurrentUser < Draper::Decorator
                 method: :get)
     end
   end
+
+  def create_room_url
+    if object
+      h.link_to("Create New Room",
+                h.new_room_path)
+    else
+      ""
+    end
+  end
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
