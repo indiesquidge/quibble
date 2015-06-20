@@ -10,8 +10,6 @@ class RoomsController < ApplicationController
     if room.save
       room.update!(user_id: current_user.id)
       respond_with room
-      # redirect_to room_path(room)
-      # flash[:success] = "Your room has been created!"
     else
       head :bad_request
     end
