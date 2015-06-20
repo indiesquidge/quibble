@@ -26,7 +26,7 @@ class RoomsController < ApplicationController
     room.random_choice.update!(chosen: true)
 
     if request.xhr?
-      head :ok
+      respond_with room.state, json: room.state
     else
       redirect_to room_path(room)
     end

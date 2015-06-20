@@ -10,14 +10,14 @@ $(document).ready(function() {
 
       Date.now //fix by Ari Fuchs, afuchs.tumblr.com/post/23550124774/date-now-in-ie8
 
-      Date.now = Date.now || function() { return +new Date };
+      Date.now = Date.now || function() { return + new Date };
 
       function closeRoom() {
         $.ajax({
           dataType: 'text',
           type: 'put',
           url: window.location.href,
-          success: window.location.reload(),
+           // success: window.location.reload(),
         });
       }
 
@@ -59,7 +59,6 @@ $(document).ready(function() {
           (function frame() {
             var current = Date.now(),
               remaining = end - current,
-              finished  = 0,
 
               rate = n + 1 - remaining / duration;
 
@@ -67,9 +66,14 @@ $(document).ready(function() {
 
               draw(element, n - 0.0001);
               closeRoom();
-
               if(remaining < totaldur && n) return
             }
+
+            $.ajax({
+              dataType: 'text',
+              type: 'post',
+              url: '/animation_catcher'
+            });
 
             draw(element, rate);
 
