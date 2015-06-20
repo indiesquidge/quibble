@@ -25,7 +25,8 @@ class RoomsController < ApplicationController
     room.update!(state: "closed")
     room.random_choice.update!(chosen: true)
 
-    redirect_to :back
+    redirect_to room_path(room)
+
   end
 
   private

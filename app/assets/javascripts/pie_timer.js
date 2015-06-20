@@ -4,123 +4,85 @@ $(document).ready(function() {
   var roomPage = '/rooms/';
   if( window.location.href.includes(roomPage)) {
 
-  ;(function(w) {
+    ;(function(w) {
 
-    'use strict';
+      'use strict';
 
-    Date.now //fix by Ari Fuchs, afuchs.tumblr.com/post/23550124774/date-now-in-ie8
+      Date.now //fix by Ari Fuchs, afuchs.tumblr.com/post/23550124774/date-now-in-ie8
 
-    Date.now = Date.now || function() { return +new Date };
+      Date.now = Date.now || function() { return +new Date };
 
-    // Draw SVG path
+      function closeRoom() {
+        $.ajax({
+          dataType: 'text',
+          type: 'put',
+          url: window.location.href,
+        });
+      }
 
-    function draw(element, rate) {
-      var count = element.length,
-        angle = 360 * rate;
+      function draw(element, rate) {
+        var count = element.length,
+          angle = 360 * rate;
 
-      angle %= 360;
+        angle %= 360;
 
-      var rad = (angle * Math.PI / 180),
-        x = Math.sin(rad) * 125,
-        y = Math.cos(rad) * - 125,
-        mid = (angle > 180) ? 1 : 0,
-        shape = 'M 0 0 v -125 A 125 125 1 '
-      + mid + ' 1 '
-      +  x  + ' '
-      +  y  + ' z';
+        var rad = (angle * Math.PI / 180),
+          x = Math.sin(rad) * 125,
+          y = Math.cos(rad) * - 125,
+          mid = (angle > 180) ? 1 : 0,
+          shape = 'M 0 0 v -125 A 125 125 1 '
+        + mid + ' 1 '
+        +  x  + ' '
+        +  y  + ' z';
 
-      // If array of elements, draw each one
+        if(element instanceof Array)
+          while(count--)
+            element[count].setAttribute('d', shape)
+        else
+          element.setAttribute('d', shape)
+      }
 
-      if(element instanceof Array)
-        while(count--)
-          element[count].setAttribute('d', shape)
-      else
-         element.setAttribute('d', shape)
-     }
+      w.svgPieTimer = function(props) {
 
-    // Prepare timer
-    // Define in global scope
+        var element = props.element,
+          duration = 180000,
+          n = 1;
 
-    w.svgPieTimer = function(props) {
+        // Optional warning
 
-      var element = props.element,
-        duration = 180000,
-        n = props.loops;
+        if(!element) throw "SVG Pie Timer: Error - element required"
 
-      // Optional warning
+          var end = Date.now() + duration * n,
+            totaldur = duration * n;
 
-      if(!element) throw "SVG Pie Timer: Error - element required"
+          (function frame() {
+            var current = Date.now(),
+              remaining = end - current,
+              finished  = 0,
 
-        // This part might be confusing:
-        // If n==0, do infinite loops
-        // In other cases where n is set, do n loops
-        // If n is not set, do 1 loop
-        // Do it this way to prevent mixing n==0 and !n
+              rate = n + 1 - remaining / duration;
 
-        // n = (n==0) ? 0 : n ? n : 1;
-        n = 1;
+            if(remaining < 60) {
 
-        var end = Date.now() + duration * n,
-          totaldur = duration * n;
+              draw(element, n - 0.0001);
+              closeRoom();
 
-        // Animate frame by frame
+              if(remaining < totaldur && n) return
+            }
 
-        (function frame() {
-          var current = Date.now(),
-            remaining = end - current,
+            draw(element, rate);
 
-            // Now set rotation rate
-            // E.g. 50% of first loop returns 1.5
-            // E.g. 75% of sixth loop returns 6.75
-            // Has to return >0 for SVG to be drawn correctly
-            // If you need the current loop, use Math.floor(rate)
+            requestAnimationFrame(frame);
+          }());
+      }
 
-            rate = n + 1 - remaining / duration;
+    })(window, undefined);
 
-          // As requestAnimationFrame will draw whenever capable,
-          // the animation might end before it reaches 100%.
-          // Let's simulate completeness on the last visual
-          // frame of the loop, regardless of actual progress
+    var loader = document.getElementById('loader'),
+      border = document.getElementById('border');
 
-          if(remaining < 60) {
-
-            // 1.0 might break, set to slightly lower than 1
-            // Update: Set to slightly lower than n instead
-
-            draw(element, n - 0.0001);
-
-
-            // Stop animating when we reach n loops (if n is set)
-
-            if(remaining < totaldur && n) return
-          }
-
-        // To reverse, uncomment this line
-        //rate = 360 - rate;
-
-        // Draw
-        draw(element, rate);
-
-        // Request next frame
-
-        requestAnimationFrame(frame);
-        }());
-    }
-
-  })(window, undefined);
-
-  var loader = document.getElementById('loader'),
-    border = document.getElementById('border');
-
-  svgPieTimer({
-    // Element (Required) SVG sub element to animate. Accepts array.
-    element: [loader, border],
-
-    // Duration (Optional) In milliseconds. Defaults to 1000.
-    duration: 1000,
-
-    // Loops (Optional) Defaults to 1. Set to 0 for infinite.
-    loops: 0
-  });
-}
+    svgPieTimer({
+      element: [loader, border],
+    });
+  }
 });
