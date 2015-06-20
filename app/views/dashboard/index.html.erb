@@ -1,16 +1,16 @@
 <div class="row">
   <% if current_user %>
-    <div id="new-room-form" class="container col s4"></div>
+    <div id="new-room-form" class="container col m4 s12"></div>
   <% else %>
-    <%= link_to "Login to create room", "/auth/github", class: "col s3 left submit btn" %>
+    <%= link_to "Login to create room", "/auth/github", class: "col m3 s12 left submit btn" %>
   <% end %>
 
-  <div class="container col s7">
+  <div class="container col m7 s12">
     <div class="rooms">
       <table class="striped">
         <thead>
           <tr>
-            <th class="col s7" data-field="name"><h5>Rooms</h5></th>
+            <th class="col m7 s12" data-field="name"><h5>Rooms</h5></th>
           </tr>
         </thead>
         <tbody>
