@@ -1,18 +1,18 @@
 require "rails_helper"
 
 describe "Room status" do
-  it "appears as pending while inactive and not completed" do
+  it "appears as pending while inactive and not completed", js: true do
     page.visit root_path
     mock_omniauth_user
 
-    page.within("#github-login .right") do
-      page.click_on "Login with GitHub"
-    end
+    page.click_on "Login to create room"
 
-    fill_in("room[name]", with: "Status test")
-    fill_in("room[choice]", with: "first")
-    fill_in("room[choice]", with: "second")
-    click_on "Create room"
+    within "#new-room-form" do
+      page.fill_in("topic-field", with: "Testing Suite")
+      page.fill_in("choice-field", with: "rspec")
+      page.fill_in("choice-field", with: "second")
+      page.click_link_or_button "Create Room"
+    end
 
     page.visit root_path
 
@@ -31,7 +31,7 @@ describe "Room status" do
 
     page.visit room_path(room)
 
-    page.within("#room-show") do
+    page.within(".room-status") do
       expect(page).to have_content("Active")
     end
   end

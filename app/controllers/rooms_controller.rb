@@ -1,17 +1,17 @@
 class RoomsController < ApplicationController
+  respond_to :json, :html
+
   def new
   end
 
   def create
     room = Room.new(room_params)
-    room.choices.build(title: params[:room][:choice])
+    params[:room][:choices].each { |choice| room.choices.build(title: choice) }
     if room.save
       room.update!(user_id: current_user.id)
-      redirect_to room_path(room)
-      flash[:success] = "Your room has been created!"
+      respond_with room
     else
-      flash[:error] = "An error prevented your room from being saved."
-      redirect_to root_path
+      head :bad_request
     end
   end
 

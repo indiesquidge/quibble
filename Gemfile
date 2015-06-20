@@ -12,6 +12,8 @@ gem "omniauth-github"
 gem "figaro"
 gem "execjs"
 gem "therubyracer"
+gem "responders"
+gem 'selenium-webdriver', '~> 2.46.2'
 
 group :development, :test do
   gem 'database_cleaner'

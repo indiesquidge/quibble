@@ -15,27 +15,33 @@ RSpec.describe "Room with choices" do
     end
   end
 
-  it "sets a random choice as the chosen room when the room is closed" do
+  it "sets a random choice as the chosen room when the room is closed", js: true do
     page.visit root_path
     mock_omniauth_user
 
-    page.within("#github-login .right") do
-      page.click_on "Login with GitHub"
+    page.click_on "Login to create room"
+
+    fill_in("topic-field", with: "Pens or pencils")
+    fill_in("choice-field", with: "Pencil")
+    find(:css, "#add-input-field").click
+    within all('#choice-field-section').last do
+      fill_in("choice-field", with: "Pen")
     end
 
-    fill_in("room[name]", with: "Pens or pencils")
-    fill_in("room[choice]", with: "Pencil")
-
-    page.click_on "Create room"
+    page.click_on "Create Room"
 
     room = Room.find_by(slug: current_path.sub(/\/rooms\//, ""))
-    choice_before = room.choices.first
-    expect(choice_before.chosen?).to eq(false)
+    choice1_before = room.choices.first
+    choice2_before = room.choices.last
+    expect(choice1_before.chosen?).to eq(false)
+    expect(choice2_before.chosen?).to eq(false)
 
     page.click_on "Close this Topic"
-    choice_after = room.choices.first
 
-    expect(choice_after.chosen?).to eq(true)
+    choice1_after = room.choices.first
+    choice2_after = room.choices.last
+
+    expect(choice1_after.chosen? || choice2_after.chosen?).to eq(true)
   end
 
   context "closed room" do

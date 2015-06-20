@@ -7,7 +7,7 @@
     <div id="github-login" class="right-align">
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
-          <li><%= link_to "Create New Room", new_room_path %></li>
+          <li><%= link_to "Create New Room", root_path %></li>
           <li><%= link_to "Logout", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Login with GitHub", "/auth/github" %></li>
@@ -15,7 +15,7 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <% if current_user %>
-          <li><%= link_to "Create New Room", new_room_path %></li>
+          <li><%= link_to "Create New Room", root_path %></li>
           <li><%= link_to "Logout", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Login with GitHub", "/auth/github" %></li>

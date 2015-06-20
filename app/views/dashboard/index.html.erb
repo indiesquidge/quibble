@@ -1,13 +1,16 @@
-<div class="container">
+<div class="row">
+  <% if current_user %>
+    <div id="new-room-form" class="container col m4 s12"></div>
+  <% else %>
+    <%= link_to "Login to create room", "/auth/github", class: "col m3 s12 left submit btn" %>
+  <% end %>
 
-  <%= render partial: "shared/new_room_form" %>
-
-  <div class="row">
+  <div class="container col m7 s12">
     <div class="rooms">
       <table class="striped">
         <thead>
           <tr>
-            <th data-field="name">Room Name</th>
+            <th class="col m7 s12" data-field="name"><h5>Rooms</h5></th>
           </tr>
         </thead>
         <tbody>
