@@ -17,6 +17,7 @@ $(document).ready(function() {
           dataType: 'text',
           type: 'put',
           url: window.location.href,
+          success: window.location.reload(),
         });
       }
 
@@ -45,7 +46,7 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 180000,
+          duration = 1000,
           n = 1;
 
         // Optional warning
