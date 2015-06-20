@@ -1,26 +1,22 @@
 <nav>
-  <div class="nav-wrapper">
-    <%= link_to "Quibble", root_path, class: "brand-logo" %>
-    <%= link_to "#", data: { activates: "mobile-demo" }, class: "button-collapse" do %>
-      <i class="mdi-navigation-menu"></i>
-    <% end %>
-    <div id="github-login" class="right-align">
-      <ul class="right hide-on-med-and-down">
-        <% if current_user %>
-          <li><%= link_to "Create New Room", root_path %></li>
-          <li><%= link_to "Logout", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Login with GitHub", "/auth/github" %></li>
-        <% end %>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <% if current_user %>
-          <li><%= link_to "Create New Room", root_path %></li>
-          <li><%= link_to "Logout", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Login with GitHub", "/auth/github" %></li>
-        <% end %>
-      </ul>
-    </div>
+<div class="nav-wrapper">
+  <%= link_to "Quibble", root_path, class: "brand-logo" %>
+  <%= link_to "#", data: { activates: "mobile-demo" }, class: "button-collapse" do %>
+    <i class="mdi-navigation-menu"></i>
+  <% end %>
+  <div id="github-login" class="right-align">
+    <ul class="right hide-on-med-and-down">
+      <% if current_user.object %>
+        <li><%= link_to "Create New Room", new_room_path %></li>
+      <% end %>
+      <li><%= current_user.session_url %></li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <% if current_user.object %>
+        <li><%= link_to "Create New Room", new_room_path %></li>
+      <% end %>
+      <li><%= current_user.session_url %></li>
+    </ul>
   </div>
+</div>
 </nav>
