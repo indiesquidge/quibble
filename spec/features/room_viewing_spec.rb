@@ -59,4 +59,41 @@ describe "Room status" do
 
     expect(page).to have_button("Close this Topic")
   end
+
+  it "has a timer counting down upon active status" do
+    page.visit root_path
+    mock_omniauth_user
+
+    page.within("#github-login .right") do
+      page.click_on "Login with GitHub"
+    end
+
+    room = Room.new(name: "Git Practices")
+    room.choices.build(title: "Rebase")
+    room.choices.build(title: "Merge with master")
+    room.save
+    room.update(user_id: User.first.id)
+
+    page.visit room_path(room)
+
+    expect(page).to have_css('#timer-clock')
+  end
+
+  it "after three minutes timer ends and closes room, if not previously closed" do
+    page.visit root_path
+    mock_omniauth_user
+
+    page.within("#github-login .right") do
+      page.click_on "Login with GitHub"
+    end
+
+    room = Room.new(name: "Git Practices")
+    room.choices.build(title: "Rebase")
+    room.choices.build(title: "Merge with master")
+    room.save
+    room.update(user_id: User.first.id)
+
+    page.visit room_path(room)
+    expect(page).to have_content("This thread has been closed")
+  end
 end
