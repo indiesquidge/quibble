@@ -15,7 +15,7 @@ class CurrentUser < Draper::Decorator
   end
 
   def create_room_url
-    if object
+    if object && !h.current_page?(h.new_room_path)
       h.link_to("Create New Room",
                 h.new_room_path)
     else
