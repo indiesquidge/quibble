@@ -31,7 +31,7 @@ describe "Room status" do
 
     page.visit room_path(room)
 
-    page.within("#room-show") do
+    page.within(".room-status") do
       expect(page).to have_content("Active")
     end
   end
