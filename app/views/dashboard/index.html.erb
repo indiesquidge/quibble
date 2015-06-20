@@ -1,5 +1,5 @@
 <div class="row">
-  <% if current_user %>
+  <% if current_user.object %>
     <div id="new-room-form" class="container col m4 s12"></div>
   <% else %>
     <%= link_to "Login to create room", "/auth/github", class: "col m3 s12 left submit btn" %>

@@ -33,14 +33,14 @@ class CurrentUser < Draper::Decorator
     end
   end
 
-    def close_topic(room)
-      if object == room.user
-        h.button_to("Close this Topic",
-                   h.room_path(room),
-                   method: :put,
-                   class: "btn col s12")
-      else
-        ""
-      end
+  def close_topic(room)
+    if object == room.user
+      h.button_to("Close this Topic",
+                 h.room_path(room),
+                 method: :put,
+                 class: "btn col s12")
+    else
+      ""
     end
+  end
 end
