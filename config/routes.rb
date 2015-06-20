@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   resources :rooms, param: :slug
+  post "/animation_catcher", to: "rooms#catch_animation"
   resources :messages
 
 end

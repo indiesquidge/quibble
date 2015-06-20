@@ -33,6 +33,10 @@ class RoomsController < ApplicationController
 
   end
 
+  def catch_animation
+     binding.pry
+  end
+
   private
 
   def room_params

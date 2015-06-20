@@ -17,7 +17,7 @@ $(document).ready(function() {
           dataType: 'text',
           type: 'put',
           url: window.location.href,
-           // success: window.location.reload(),
+          // success: window.location.reload(),
         });
       }
 
@@ -69,15 +69,22 @@ $(document).ready(function() {
               if(remaining < totaldur && n) return
             }
 
-            $.ajax({
-              dataType: 'text',
-              type: 'post',
-              url: '/animation_catcher'
-            });
 
-            draw(element, rate);
+          draw(element, rate);
 
-            requestAnimationFrame(frame);
+          requestAnimationFrame(frame);
+
+          var loaderPath = $($(element)[0]).attr("d")
+          var borderPath = $($(element)[1]).attr("d")
+
+          $.ajax({
+            dataType: 'text',
+            type: 'post',
+            url: '/animation_catcher',
+            data: { loader: loaderPath,
+              border: borderPath,
+            }
+          });
           }());
       }
 
