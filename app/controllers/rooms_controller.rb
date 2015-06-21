@@ -1,9 +1,6 @@
 class RoomsController < ApplicationController
   respond_to :json, :html
 
-  def new
-  end
-
   def create
     room = Room.new(room_params)
     params[:room][:choices].each { |choice| room.choices.build(title: choice) }

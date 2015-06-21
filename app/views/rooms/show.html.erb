@@ -37,8 +37,8 @@
       <div class="row">
         <div class="room-status">
           <p class="center-align">Room status: <b><%= @room.display_current_state %></b></p>
-          <% if current_user == @room.user && !@room.closed? %>
-            <%= button_to "Close this Topic", room_path(@room), method: :put, class: "btn col s12" %>
+          <% if !@room.closed? %>
+            <%= current_user.close_topic(@room) %>
           <% end %>
         </div> <!-- room-status -->
       </div> <!-- row -->
