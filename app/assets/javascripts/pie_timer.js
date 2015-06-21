@@ -2,7 +2,22 @@
 
 $(document).ready(function() {
   var roomPage = '/rooms/';
-  if( window.location.href.includes(roomPage)) {
+
+  function isOpenRoom() {
+    // var result;
+    // $.getJSON(window.location.href).
+    //   then(function(room) {
+    //   return result = (room.state === "closed");
+    // });
+    // return result;
+    if (($("h5#pending").html()) || ($("h5#active").html())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  if( window.location.href.includes(roomPage) && isOpenRoom()) {
 
     ;(function(w) {
 
@@ -12,18 +27,29 @@ $(document).ready(function() {
 
       Date.now = Date.now || function() { return + new Date };
 
-      function closeRoom() {
+          // $.ajax({
+          //   dataType: 'text',
+          //   type: 'post',
+          //   url: '/animation_catcher',
+          // });
+
+
+      function closeRoom(loaderPath, borderPath) {
         $.ajax({
           dataType: 'text',
-          type: 'put',
-          url: window.location.href,
+          type: 'post',
+          // url: window.location.href,
+          url: "/animation_catcher",
+          data: { loader: loaderPath,
+                  border: borderPath,
+          }
           // success: window.location.reload(),
         });
       }
 
       function draw(element, rate) {
         var count = element.length,
-          angle = 360 * rate;
+            angle = 360 * rate;
 
         angle %= 360;
 
@@ -32,9 +58,9 @@ $(document).ready(function() {
           y = Math.cos(rad) * - 125,
           mid = (angle > 180) ? 1 : 0,
           shape = 'M 0 0 v -125 A 125 125 1 '
-        + mid + ' 1 '
-        +  x  + ' '
-        +  y  + ' z';
+          + mid + ' 1 '
+          +  x  + ' '
+          +  y  + ' z';
 
         if(element instanceof Array)
           while(count--)
@@ -64,8 +90,11 @@ $(document).ready(function() {
 
             if(remaining < 60) {
 
+              var loaderPath = $($('path')[0]).attr("d")
+              var borderPath = $($('path')[1]).attr("d")
+
               draw(element, n - 0.0001);
-              closeRoom();
+              closeRoom(loaderPath, borderPath);
               if(remaining < totaldur && n) return
             }
 
@@ -74,27 +103,23 @@ $(document).ready(function() {
 
           requestAnimationFrame(frame);
 
-          var loaderPath = $($(element)[0]).attr("d")
-          var borderPath = $($(element)[1]).attr("d")
 
-          $.ajax({
-            dataType: 'text',
-            type: 'post',
-            url: '/animation_catcher',
-            data: { loader: loaderPath,
-              border: borderPath,
-            }
-          });
-          }());
+        }());
       }
 
     })(window, undefined);
 
     var loader = document.getElementById('loader'),
-      border = document.getElementById('border');
+        border = document.getElementById('border');
 
     svgPieTimer({
       element: [loader, border],
     });
+  } else {
+    showFullPie();
+  }
+
+  function showFullPie() {
+   $('#full-pie').css('display', 'block')
   }
 });

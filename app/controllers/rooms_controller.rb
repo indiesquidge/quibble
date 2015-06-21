@@ -18,11 +18,15 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find_by(slug: params[:slug])
     @messages = @room.messages
+
+    if request.xhr?
+      respond_with @room
+    end
   end
 
   def update
     room = Room.find_by(slug: params[:slug])
-    room.update!(state: "closed")
+    room.update!(state: "closed", timer_border: params[:border], timer_loader: params[:loader])
     room.random_choice.update!(chosen: true)
 
     if request.xhr?
@@ -34,7 +38,9 @@ class RoomsController < ApplicationController
   end
 
   def catch_animation
-     binding.pry
+    binding.pry
+    @room.timer_border = params[:border]
+    @room.timer_loader = params[:loader]
   end
 
   private

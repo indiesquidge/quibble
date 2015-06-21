@@ -6,7 +6,7 @@
         <tr>
           <th><h2><%= @room.name %></h2></th>
           <th>
-            <h5><%= @room.display_current_state %></h5>
+            <h5 id=<%= @room.state %>><%= @room.display_current_state %></h5>
             <% if current_user == @room.user && !@room.closed? %>
               <%= button_to "Close this Topic", room_path(@room), class: "btn", method: :put %>
             <% end %>
@@ -68,6 +68,7 @@
     <svg viewbox="0 0 250 250">
       <path id="border" transform="translate(125,125)"/>
       <path id="loader" transform="translate(125,125) scale(.84)"/>
+      <circle id="full-pie" cx="100" cy="100" r="90">
     </svg>
   </div>
 </div>
