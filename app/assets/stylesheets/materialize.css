@@ -2540,7 +2540,7 @@ span.badge {
 
 @font-face {
   font-family: "Material-Design-Icons";
-  src: url("/assets/material-design-icons/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), url("/assets/material-design-icons/Material-Design-Icons.woff2") format("woff2"), url("/assets/material-design-icons/Material-Design-Icons.woff") format("woff"), url("/assets/material-design-icons/Material-Design-Icons.ttf") format("truetype"), url("/assets/material-design-icons/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
+  src: asset_url("material-design-icons/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), asset_url("material-design-icons/Material-Design-Icons.woff2") format("woff2"), asset_url("material-design-icons/Material-Design-Icons.woff") format("woff"), asset_url("material-design-icons/Material-Design-Icons.ttf") format("truetype"), asset_url("material-design-icons/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -5118,27 +5118,27 @@ nav {
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/roboto/Roboto-Thin.woff2") format("woff2"), url("/assets/roboto/Roboto-Thin.woff") format("woff"), url("/assets/roboto/Roboto-Thin.ttf") format("truetype");
+  src: asset_url("roboto/Roboto-Thin.woff2") format("woff2"), asset_url("roboto/Roboto-Thin.woff") format("woff"), asset_url("roboto/Roboto-Thin.ttf") format("truetype");
   font-weight: 200; }
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/roboto/Roboto-Light.woff2") format("woff2"), url("/assets/roboto/Roboto-Light.woff") format("woff"), url("/assets/roboto/Roboto-Light.ttf") format("truetype");
+  src: asset_url("roboto/Roboto-Light.woff2") format("woff2"), asset_url("roboto/Roboto-Light.woff") format("woff"), asset_url("roboto/Roboto-Light.ttf") format("truetype");
   font-weight: 300; }
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/roboto/Roboto-Regular.woff2") format("woff2"), url("/assets/roboto/Roboto-Regular.woff") format("woff"), url("/assets/roboto/Roboto-Regular.ttf") format("truetype");
+  src: asset_url("roboto/Roboto-Regular.woff2") format("woff2"), asset_url("roboto/Roboto-Regular.woff") format("woff"), asset_url("roboto/Roboto-Regular.ttf") format("truetype");
   font-weight: 400; }
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/roboto/Roboto-Medium.woff2") format("woff2"), url("/assets/roboto/Roboto-Medium.woff") format("woff"), url("/assets/roboto/Roboto-Medium.ttf") format("truetype");
+  src: asset_url("roboto/Roboto-Medium.woff2") format("woff2"), asset_url("roboto/Roboto-Medium.woff") format("woff"), asset_url("roboto/Roboto-Medium.ttf") format("truetype");
   font-weight: 500; }
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/roboto/Roboto-Bold.woff2") format("woff2"), url("/assets/roboto/Roboto-Bold.woff") format("woff"), url("/assets/roboto/Roboto-Bold.ttf") format("truetype");
+  src: asset_url("roboto/Roboto-Bold.woff2") format("woff2"), asset_url("roboto/Roboto-Bold.woff") format("woff"), asset_url("roboto/Roboto-Bold.ttf") format("truetype");
   font-weight: 700; }
 
 a {
