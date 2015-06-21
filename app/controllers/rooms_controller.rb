@@ -38,9 +38,9 @@ class RoomsController < ApplicationController
   end
 
   def catch_animation
-    binding.pry
-    @room.timer_border = params[:border]
-    @room.timer_loader = params[:loader]
+    room = Room.find_by(slug: params[:slug])
+    room.update!(timer_border: params[:time_left])
+    respond_with room
   end
 
   private

@@ -9,15 +9,19 @@ svg {
   height: 250px;
 }
 
-#loader{
+#loader {
   fill: #4caf50; }
 
-#border{
+#border {
   fill: #81c784 }
 
-#full-pie{
+#full-pie {
   fill:#4caf50;
   stroke:#81c784;
   stroke-width:15;
   display:none;
+}
+
+#state-th {
+  width:300px;
 }

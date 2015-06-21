@@ -27,29 +27,23 @@ $(document).ready(function() {
 
       Date.now = Date.now || function() { return + new Date };
 
-          // $.ajax({
-          //   dataType: 'text',
-          //   type: 'post',
-          //   url: '/animation_catcher',
-          // });
+      var loader = document.getElementById('loader'),
+        border = document.getElementById('border');
 
-
-      function closeRoom(loaderPath, borderPath) {
+      function saveAnimationState(rate) {
         $.ajax({
           dataType: 'text',
           type: 'post',
-          // url: window.location.href,
           url: "/animation_catcher",
-          data: { loader: loaderPath,
-                  border: borderPath,
-          }
-          // success: window.location.reload(),
+          data: { time_left: rate,
+                  slug: window.location.pathname.slice(7) },
+
         });
       }
 
       function draw(element, rate) {
         var count = element.length,
-            angle = 360 * rate;
+          angle = 360 * rate;
 
         angle %= 360;
 
@@ -58,9 +52,9 @@ $(document).ready(function() {
           y = Math.cos(rad) * - 125,
           mid = (angle > 180) ? 1 : 0,
           shape = 'M 0 0 v -125 A 125 125 1 '
-          + mid + ' 1 '
-          +  x  + ' '
-          +  y  + ' z';
+        + mid + ' 1 '
+        +  x  + ' '
+        +  y  + ' z';
 
         if(element instanceof Array)
           while(count--)
@@ -72,12 +66,8 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 1000,
+          duration = 10000,
           n = 1;
-
-        // Optional warning
-
-        if(!element) throw "SVG Pie Timer: Error - element required"
 
           var end = Date.now() + duration * n,
             totaldur = duration * n;
@@ -89,28 +79,34 @@ $(document).ready(function() {
               rate = n + 1 - remaining / duration;
 
             if(remaining < 60) {
-
-              var loaderPath = $($('path')[0]).attr("d")
-              var borderPath = $($('path')[1]).attr("d")
+              closeRoom();
 
               draw(element, n - 0.0001);
-              closeRoom(loaderPath, borderPath);
               if(remaining < totaldur && n) return
             }
 
-
-          draw(element, rate);
+          if(rate === 1) {
+            saveAnimationState(rate);
+            draw(element, 1.703);
+          } else if(rate > (2.0002 - .703)) {
+            closeRoom();
+            replaceCurrentState();
+            showFullPie();
+            return;
+          } else {
+            saveAnimationState(rate);
+            draw(element, rate + 0.703);
+          }
 
           requestAnimationFrame(frame);
 
-
-        }());
+          }());
       }
 
     })(window, undefined);
 
     var loader = document.getElementById('loader'),
-        border = document.getElementById('border');
+      border = document.getElementById('border');
 
     svgPieTimer({
       element: [loader, border],
@@ -119,7 +115,21 @@ $(document).ready(function() {
     showFullPie();
   }
 
-  function showFullPie() {
-   $('#full-pie').css('display', 'block')
-  }
 });
+
+  function closeRoom() {
+    $.ajax({
+      type: 'put',
+      url: window.location.href,
+    });
+  }
+
+  function replaceCurrentState() {
+    var newState = '<h5 id="closed">' + "closed" + '</h5>'
+    $('#state-th').children().remove();
+    $(newState).appendTo('#state-th');
+  }
+
+  function showFullPie() {
+    $('#full-pie').css('display', 'block')
+  }

@@ -3,9 +3,9 @@
   <div class="col s8">
     <div id="room-show">
       <table>
-        <tr>
+        <tr id="room-status">
           <th><h2><%= @room.name %></h2></th>
-          <th>
+          <th id="state-th">
             <h5 id=<%= @room.state %>><%= @room.display_current_state %></h5>
             <% if current_user == @room.user && !@room.closed? %>
               <%= button_to "Close this Topic", room_path(@room), class: "btn", method: :put %>
