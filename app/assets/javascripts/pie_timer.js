@@ -1,16 +1,8 @@
-/*! SVG Pie Timer 0.9.1 | Anders Grimsrud, grint.no | MIT License | github.com/agrimsrud/svgPieTimer.js */
-
 $(document).ready(function() {
   var roomPage = '/rooms/';
 
   function isOpenRoom() {
-    // var result;
-    // $.getJSON(window.location.href).
-    //   then(function(room) {
-    //   return result = (room.state === "closed");
-    // });
-    // return result;
-    if (($("h5#pending").html()) || ($("h5#active").html())) {
+    if (($("p#pending").html()) || ($("p#active").html())) {
       return true;
     } else {
       return false;
@@ -34,10 +26,22 @@ $(document).ready(function() {
         $.ajax({
           dataType: 'text',
           type: 'post',
-          url: "/animation_catcher",
+          url: '/animation_catcher',
           data: { time_left: rate,
-                  slug: window.location.pathname.slice(7) },
+            slug: window.location.pathname.slice(7) },
 
+        });
+      }
+
+      function drawFromDatabase(element) {
+        var room = window.location.pathname.slice(7)
+        $.ajax({
+          type: 'get',
+          url: '/send_animation?slug=' + room,
+          success: function(rate) {
+             rate = parseInt(rate);
+            return draw(element, rate);
+          }
         });
       }
 
@@ -66,41 +70,40 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 10000,
+          duration = 1000,
           n = 1;
 
-          var end = Date.now() + duration * n,
-            totaldur = duration * n;
+        var end = Date.now() + duration * n,
+          totaldur = duration * n;
 
-          (function frame() {
-            var current = Date.now(),
-              remaining = end - current,
+        (function frame() {
+          var current = Date.now(),
+            remaining = end - current,
 
-              rate = n + 1 - remaining / duration;
+            rate = n + 1 - remaining / duration;
 
-            if(remaining < 60) {
-              closeRoom();
-
-              draw(element, n - 0.0001);
-              if(remaining < totaldur && n) return
-            }
-
-          if(rate === 1) {
-            saveAnimationState(rate);
-            draw(element, 1.703);
-          } else if(rate > (2.0002 - .703)) {
+          if(remaining < 60) {
             closeRoom();
-            replaceCurrentState();
-            showFullPie();
-            return;
-          } else {
-            saveAnimationState(rate);
-            draw(element, rate + 0.703);
+
+            draw(element, n - 0.0001);
+            if(remaining < totaldur && n) return
           }
 
-          requestAnimationFrame(frame);
+        if(rate === 1) {
+            drawFromDatabase(element)
+        } else if(rate > 1.9229) {
+          closeRoom();
+          replaceCurrentState();
+          showFullPie();
+          return;
+        } else {
+          saveAnimationState(rate);
+          draw(element, rate);
+        }
 
-          }());
+        requestAnimationFrame(frame);
+
+        }());
       }
 
     })(window, undefined);
@@ -117,19 +120,19 @@ $(document).ready(function() {
 
 });
 
-  function closeRoom() {
-    $.ajax({
-      type: 'put',
-      url: window.location.href,
-    });
-  }
+function closeRoom() {
+  $.ajax({
+    type: 'put',
+    url: window.location.href,
+  });
+}
 
-  function replaceCurrentState() {
-    var newState = '<h5 id="closed">' + "closed" + '</h5>'
-    $('#state-th').children().remove();
-    $(newState).appendTo('#state-th');
-  }
+function replaceCurrentState() {
+  var newState = '<h5 class="center-align" id="closed">Closed</h5>'
+  $('#state-of-room').children().remove();
+  $('#state-of-room').append(newState);
+}
 
-  function showFullPie() {
-    $('#full-pie').css('display', 'block')
-  }
+function showFullPie() {
+  $('#full-pie').css('display', 'block')
+}

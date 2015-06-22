@@ -1,9 +1,6 @@
 class RoomsController < ApplicationController
   respond_to :json, :html
 
-  def new
-  end
-
   def create
     room = Room.new(room_params)
     params[:room][:choices].each { |choice| room.choices.build(title: choice) }
@@ -26,7 +23,7 @@ class RoomsController < ApplicationController
 
   def update
     room = Room.find_by(slug: params[:slug])
-    room.update!(state: "closed", timer_border: params[:border], timer_loader: params[:loader])
+    room.update!(state: "closed")
     room.random_choice.update!(chosen: true)
 
     if request.xhr?
@@ -39,8 +36,13 @@ class RoomsController < ApplicationController
 
   def catch_animation
     room = Room.find_by(slug: params[:slug])
-    room.update!(timer_border: params[:time_left])
-    respond_with room
+    room.update!(rate: params[:time_left])
+    head :ok
+  end
+
+  def send_animation
+    room = Room.find_by(slug: params[:slug])
+    respond_with room.rate.to_json, json: room.rate.to_json
   end
 
   private

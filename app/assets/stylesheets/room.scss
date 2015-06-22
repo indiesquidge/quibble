@@ -5,8 +5,7 @@
 svg {
   display: block;
   margin: 50px auto;
-  width: 250px;
-  height: 250px;
+  margin-top:0px;
 }
 
 #loader {
@@ -18,7 +17,7 @@ svg {
 #full-pie {
   fill:#4caf50;
   stroke:#81c784;
-  stroke-width:15;
+  stroke-width:18;
   display:none;
 }
 
