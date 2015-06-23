@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User in a chatroom", type: :feature do
+RSpec.describe "User in a chatroom", type: :feature, js: true do
   it "sees a list of recent messages" do
     chatroom = Room.new(name: "lonely")
     chatroom.choices.build(title: "dj")
@@ -11,7 +11,7 @@ RSpec.describe "User in a chatroom", type: :feature do
     mes_4 = chatroom.messages.create!(body: "Okay, well, goodbye")
 
     page.visit room_path(chatroom)
-    page.within("#recent-messages") do
+    page.within(".messages") do
       expect(page).to have_content(mes_1.body)
       expect(page).to have_content(mes_2.body)
       expect(page).to have_content(mes_3.body)
@@ -26,7 +26,7 @@ RSpec.describe "User in a chatroom", type: :feature do
 
     page.visit room_path(room)
 
-    page.within("#recent-messages") do
+    page.within(".messages") do
       expect(page).not_to have_content("Hello world")
     end
 
@@ -35,7 +35,7 @@ RSpec.describe "User in a chatroom", type: :feature do
       page.click_on "Create message"
     end
 
-    page.within("#recent-messages") do
+    page.within(".messages") do
       expect(page).to have_content("Hello world")
     end
   end
