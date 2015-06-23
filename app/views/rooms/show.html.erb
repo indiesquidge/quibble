@@ -17,13 +17,9 @@
     <div class="col s5 messages">
       <table class="hoverable" style="table-layout: fixed; width: 100%">
         <tbody>
-          <div id="recent-messages">
-            <% @messages.each do |message| %>
-              <tr>
-                <td style="word-wrap: break-word"><%= message.body %></td>
-              </tr>
-            <% end %>
-          </div> <!-- recent-messages -->
+          <tr>
+            <td class="center-align"><b>current conversation...</b></td>
+          </tr>
         </tbody>
       </table>
 
