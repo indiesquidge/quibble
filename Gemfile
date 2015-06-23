@@ -16,6 +16,7 @@ gem "responders"
 gem 'selenium-webdriver', '~> 2.46.2'
 gem "draper"
 gem "redis"
+gem "materialize-sass"
 
 group :development, :test do
   gem 'database_cleaner'
