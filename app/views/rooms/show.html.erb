@@ -32,11 +32,11 @@
           <h4>This thread has been closed.</h4>
           <h5>No new messages may be posted.</h5>
         <% else %>
-          <%= form_for :message, url: messages_path do |f| %>
-            <%= f.text_field :body %>
-            <%= hidden_field_tag "room_id", @room.id %>
-            <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %>
-          <% end %>
+          <form class="input-field col s12">
+            <input required="required" type="text" name="message[body]" id="message-body" />
+            <input type="hidden" name="room" id="room" value="<%= @room.id %>" />
+            <input class="btn col m6 s12" id="create-message" type="submit" value="Create message" />
+          </form>
         <% end %>
       </div> <!-- new-message -->
     </div> <!-- messages -->
