@@ -1,6 +1,15 @@
 class RoomsController < ApplicationController
   respond_to :json, :html
 
+  def index
+   @room = Room.new(name: rand(9999))
+   @room.choices << Choice.new(title: rand(9999))
+   @room.choices << Choice.new(title: rand(9999))
+   @room.save
+   @messages = @room.messages
+
+   render :show
+  end
   def create
     room = Room.new(room_params)
     params[:room][:choices].each { |choice| room.choices.build(title: choice) }
