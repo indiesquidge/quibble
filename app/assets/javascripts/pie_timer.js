@@ -91,7 +91,7 @@ $(document).ready(function() {
 
         if(rate === 1) {
             drawFromDatabase(element)
-        } else if(rate > 1.9229) {
+        } else if(rate > 1.9220) {
           closeRoom();
           replaceCurrentState();
           showFullPie();
@@ -124,7 +124,21 @@ function closeRoom() {
   $.ajax({
     type: 'put',
     url: window.location.href,
+    success: function(choice) {
+      showChoice(choice);
+    }
   });
+}
+
+function showChoice(choice) {
+  //get all choices and find one matching choice
+  //color this green, color all others red
+ // var choices = $('#choices').find('h5').map(function() { return $(this).text() });
+ choices = $('#choices').find('h5')
+ chosen = choices.filter(function() { return parseInt($(this).text()) === choice})
+ debugger;
+ choices.parent().addClass('red-text text-lighten-4 strikethrough')
+ chosen.parent().removeClass('red-text text-lighten-4 strikethrough').addClass('green-text text-lighten-1 bold')
 }
 
 function replaceCurrentState() {

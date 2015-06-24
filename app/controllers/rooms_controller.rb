@@ -24,10 +24,11 @@ class RoomsController < ApplicationController
   def update
     room = Room.find_by(slug: params[:slug])
     room.update!(state: "closed")
-    room.random_choice.update!(chosen: true)
+    choice = room.random_choice
+    choice.update!(chosen: true)
 
     if request.xhr?
-      respond_with room.state, json: room.state
+      respond_with choice.title
     else
       redirect_to room_path(room)
     end
