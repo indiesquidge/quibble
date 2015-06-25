@@ -70,7 +70,7 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 1000,
+          duration = 10000,
           n = 1;
 
         var end = Date.now() + duration * n,
