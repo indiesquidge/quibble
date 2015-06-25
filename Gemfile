@@ -17,6 +17,7 @@ gem 'selenium-webdriver', '~> 2.46.2'
 gem "draper"
 gem "redis"
 gem "materialize-sass"
+gem "socket.io-rails"
 
 group :development, :test do
   gem 'database_cleaner'
