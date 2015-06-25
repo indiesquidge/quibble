@@ -69,9 +69,9 @@ $(document).ready(function() {
 
       w.svgPieTimer = function(props) {
 
-        var element = props.element,
-          duration = 10000,
-          n = 1;
+        var element  = props.element,
+            duration = 100000,
+            n = 1;
 
         var end = Date.now() + duration * n,
           totaldur = duration * n;
@@ -97,7 +97,7 @@ $(document).ready(function() {
           showFullPie();
           return;
         } else {
-          saveAnimationState(rate);
+          // saveAnimationState(rate);
           draw(element, rate);
         }
 
