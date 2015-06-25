@@ -143,6 +143,7 @@ function replaceCurrentState() {
   $('#state-of-room').append(newState);
   $('#message_body').remove();
   $('#submit-msg').remove();
+  $('#manual-close').remove();
 }
 
 function showFullPie() {
