@@ -4,16 +4,16 @@ class MessagesController < ApplicationController
   respond_to :json
 
   def index
-    # room = Room.find_by(slug: params[:slug])
-    # respond_with Message.where(room_id: room.id)
-    respond_with Message.all
+    $room = Room.find_by(slug: params[:slug])
+    respond_with Message.where(room_id: room.id)
   end
 
   def create
     message = Message.create(body: params[:message][:body],
-                             room_id: params[:message][:room_id])
+                             room_slug: $room.slug)
+
     respond_with message
 
-    $redis.publish "main_channel", message.to_json
+    $redis.publish "channel", message.to_json
   end
 end
