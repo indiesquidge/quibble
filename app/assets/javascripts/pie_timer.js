@@ -70,7 +70,7 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 180000,
+          duration = 1000,
           n = 1;
 
         var end = Date.now() + duration * n,
@@ -141,6 +141,8 @@ function replaceCurrentState() {
   var newState = '<h5 class="center-align" id="closed">Closed</h5>'
   $('#state-of-room').children().remove();
   $('#state-of-room').append(newState);
+  $('#message_body').remove();
+  $('#submit-msg').remove();
 }
 
 function showFullPie() {

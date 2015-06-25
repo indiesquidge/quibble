@@ -35,7 +35,7 @@
         <%= form_for :message, url: messages_path do |f| %>
           <%= f.text_field :body %>
           <%= hidden_field_tag "room_id", @room.id %>
-          <%= f.submit "Create message", class: "btn col m6 s12" %>
+          <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %>
         <% end %>
       <% end %>
     </div> <!-- new-message -->
