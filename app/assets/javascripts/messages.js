@@ -31,8 +31,7 @@ function createMessageOnSubmission() {
 function createMessage() {
   var body    = $('#message-body').val();
   var room_id = $('#room').val();
-  MessageRepo.create({message: { body: body, room_id: room_id }})
-    .then(appendMessage);
+  MessageRepo.create({message: { body: body, room_id: room_id }});
 }
 
 function appendMessage(data) {
