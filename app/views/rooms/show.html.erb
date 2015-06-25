@@ -5,29 +5,33 @@
   </div> <!-- room-show -->
 </div> <!-- row -->
 
-<div class="row">
-  <div class="col s5" id="timer-clock">
-    <svg viewbox="0 0 252 252">
-      <path id="border" transform="translate(125,125)"/>
-      <path id="loader" transform="translate(125,125) scale(.84)"/>
-      <circle id="full-pie" cx="125" cy="125" r="116">
-    </svg>
-  </div>
 
-  <div class="col s5 messages">
-    <table class="hoverable" style="table-layout: fixed; width: 100%">
-      <tbody>
-        <div id="recent-messages">
-          <% @messages.each do |message| %>
-            <tr>
-              <td style="word-wrap: break-word"><%= message.body %></td>
-            </tr>
-          <% end %>
-        </div> <!-- recent-messages -->
-      </tbody>
-    </table>
+  <%# <div class="col s5 messages"> %>
+  <%#   <table class="hoverable" style="table-layout: fixed; width: 100%"> %>
+  <%#     <tbody> %>
+  <%#       <div id="recent-messages"> %>
+  <%#         <% @messages.each do |message| %1> %>
+  <%#           <tr> %>
+  <%#             <td style="word-wrap: break-word"><%= message.body %1></td> %>
+  <%#           </tr> %>
+  <%#         <% end %1> %>
+  <%#       </div> <!-- recent-messages --> %>
+  <%#     </tbody> %>
+  <%#   </table> %>
 
-    <div id="new-message" class="input-field col s12">
+  <%#     <% else %1> %>
+  <%#       <%= form_for :message, url: messages_path do |f| %1> %>
+  <%#         <%= f.text_field :body %1> %>
+  <%#         <%= hidden_field_tag "room_id", @room.id %1> %>
+  <%#         <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %1> %>
+  <%#       <% end %1> %>
+  <%#     <% end %1> %>
+  <%#   </div> <!-- new-message --> %>
+  <%# </div> <!-- messages --> %>
+
+
+  <div class="row">
+    <div class="col l10 s12">
       <% if @room.closed? %>
         <h4>This thread has been closed.</h4>
         <h5>No new messages may be posted.</h5>
@@ -38,17 +42,28 @@
             <%= f.submit %>
           <% end %>
         <% end %>
-      <% else %>
-        <%= form_for :message, url: messages_path do |f| %>
-          <%= f.text_field :body %>
-          <%= hidden_field_tag "room_id", @room.id %>
-          <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %>
-        <% end %>
       <% end %>
-    </div> <!-- new-message -->
-  </div> <!-- messages -->
+      <table class="striped messages" style="table-layout: fixed; width: 100%">
+        <tbody>
+          <tr>
+            <td class="center-align"><b>current conversation...</b></td>
+          </tr>
+        </tbody>
+      </table>
 
-  <div class="col s2 room-details">
+      <div id="new-message" class="input-field col s12">
+        <% unless @room.closed? %>
+          <form class="input-field col s12">
+            <input required="required" type="text" name="message[body]" id="message-body" />
+            <input type="hidden" name="room" id="room" value="<%= @room.id %>" />
+            <input class="btn col l6 s12" id="create-message" type="submit" value="Create message" />
+          </form>
+        <% end %>
+      </div> <!-- new-message -->
+    </div>
+
+
+    <div class="col l2 s12 room-details">
     <div class="row">
       <div class="room-status">
         <p class="center-align">Room status: </p><b>
@@ -76,7 +91,16 @@
     </div>
   <% end %>
   </div> <!-- choices -->
-</div> <!-- room-details -->
-</div> <!-- row -->
+
+      <div id="timer-clock">
+        <svg viewbox="0 0 252 252">
+          <path id="border" transform="translate(125,125)"/>
+          <path id="loader" transform="translate(125,125) scale(.84)"/>
+          <circle id="full-pie" cx="125" cy="125" r="116">
+        </svg>
+      </div> <!-- timer-clock -->
+
+    </div> <!-- room-details -->
+  </div> <!-- row -->
 
 </div> <!-- container -->
