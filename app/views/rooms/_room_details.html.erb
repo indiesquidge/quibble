@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="room-status">
+    <p class="center-align">Room status: </p><b>
+      <div id="state-of-room">
+        <p id=<%= @room.state %> class="center-align"><%= @room.display_current_state %></p>
+      </div></b>
+      <% if !@room.closed? %>
+        <div id="manual-close"><%= current_user.close_topic(@room) %></div>
+      <% end %>
+  </div> <!-- room-status -->
+</div> <!-- row -->

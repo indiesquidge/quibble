@@ -1,0 +1,15 @@
+<div id="choices">
+<h4 class="center-align">Choices:</h4>
+<% @room.choices.each do |choice| %>
+  <div class="<%=choice.title%> center-align">
+    <% if @room.closed? && @room.choices.find_by(chosen: true) %>
+      <div class="<%=choice.chosen_display%> center-align">
+        <h5><%= choice.title %></h5>
+      </div>
+  </div>
+    <% else %>
+  <h5><%= choice.title %></h5>
+    <% end %>
+</div>
+<% end %>
+</div> <!-- choices -->

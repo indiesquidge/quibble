@@ -147,5 +147,5 @@ function replaceCurrentState() {
 }
 
 function showFullPie() {
-  $('#full-pie').css('display', 'block')
+  $('#full-pie').css('display', 'inline')
 }

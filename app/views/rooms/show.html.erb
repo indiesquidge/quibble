@@ -1,48 +1,14 @@
 <div class="container">
-<div class="row">
-  <div class="col s12" id="room-show">
-    <h2 class="center-align"><%= @room.name %></h2>
-  </div> <!-- room-show -->
-</div> <!-- row -->
 
-
-  <%# <div class="col s5 messages"> %>
-  <%#   <table class="hoverable" style="table-layout: fixed; width: 100%"> %>
-  <%#     <tbody> %>
-  <%#       <div id="recent-messages"> %>
-  <%#         <% @messages.each do |message| %1> %>
-  <%#           <tr> %>
-  <%#             <td style="word-wrap: break-word"><%= message.body %1></td> %>
-  <%#           </tr> %>
-  <%#         <% end %1> %>
-  <%#       </div> <!-- recent-messages --> %>
-  <%#     </tbody> %>
-  <%#   </table> %>
-
-  <%#     <% else %1> %>
-  <%#       <%= form_for :message, url: messages_path do |f| %1> %>
-  <%#         <%= f.text_field :body %1> %>
-  <%#         <%= hidden_field_tag "room_id", @room.id %1> %>
-  <%#         <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %1> %>
-  <%#       <% end %1> %>
-  <%#     <% end %1> %>
-  <%#   </div> <!-- new-message --> %>
-  <%# </div> <!-- messages --> %>
-
+  <div class="row">
+    <div class="col s12" id="room-show">
+      <h2 class="center-align"><%= @room.name %></h2>
+    </div> <!-- room-show -->
+  </div> <!-- row -->
 
   <div class="row">
     <div class="col l10 s12">
-      <% if @room.closed? %>
-        <h4>This thread has been closed.</h4>
-        <h5>No new messages may be posted.</h5>
-        <% if !@room.choices.find_by(chosen: true) %>
-          <h5>Enter the Winning Choice</h5>
-          <%= form_for :choice, url: "/rooms/" + @room.slug + "/choices", html: { method: :put } do |f| %>
-            <%= f.text_field :title, placeholder: "name the winning choice" %>
-            <%= f.submit %>
-          <% end %>
-        <% end %>
-      <% end %>
+      <%= render partial: "rooms/manual_close" %>
       <table class="striped messages" style="table-layout: fixed; width: 100%">
         <tbody>
           <tr>
@@ -50,7 +16,6 @@
           </tr>
         </tbody>
       </table>
-
       <div id="new-message" class="input-field col s12">
         <% unless @room.closed? %>
           <form class="input-field col s12">
@@ -62,45 +27,17 @@
       </div> <!-- new-message -->
     </div>
 
-
     <div class="col l2 s12 room-details">
-    <div class="row">
-      <div class="room-status">
-        <p class="center-align">Room status: </p><b>
-          <div id="state-of-room">
-            <p id=<%= @room.state %> class="center-align"><%= @room.display_current_state %></p>
-          </div></b>
-          <% if !@room.closed? %>
-            <div id="manual-close"><%= current_user.close_topic(@room) %></div>
-          <% end %>
-      </div> <!-- room-status -->
-    </div> <!-- row -->
-
-    <div id="choices">
-      <h4 class="center-align">Choices:</h4>
-      <% @room.choices.each do |choice| %>
-        <div class="<%=choice.title%> center-align">
-          <% if @room.closed? && @room.choices.find_by(chosen: true) %>
-            <div class="<%=choice.chosen_display%> center-align">
-              <h5><%= choice.title %></h5>
-            </div>
-        </div>
-      <% else %>
-        <h5><%= choice.title %></h5>
-      <% end %>
-    </div>
-  <% end %>
-  </div> <!-- choices -->
-
-      <div id="timer-clock">
-        <svg viewbox="0 0 252 252">
+      <%= render partial: "rooms/room_details" %>
+      <%= render partial: "rooms/room_choices" %>
+      <%# <div id="timer-clock"> %>
+        <svg id="timer-clock" viewbox="0 0 252 252">
           <path id="border" transform="translate(125,125)"/>
           <path id="loader" transform="translate(125,125) scale(.84)"/>
           <circle id="full-pie" cx="125" cy="125" r="116">
         </svg>
-      </div> <!-- timer-clock -->
-
+      <%# </div> <!-- timer-clock --> %>
     </div> <!-- room-details -->
-  </div> <!-- row -->
 
+  </div> <!-- row -->
 </div> <!-- container -->
