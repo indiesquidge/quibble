@@ -1,7 +1,8 @@
 $(document).ready(function () {
-  var socket = io.connect();
+  var socket = io.connect('http://localhost:4200');
 
-  socket.on('message', function (message) {
-    console.log(message);
+  socket.on('message', function (data) {
+    var message = JSON.parse(data);
+    appendMessage(message);
   });
 });
