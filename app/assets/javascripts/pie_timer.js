@@ -70,7 +70,7 @@ $(document).ready(function() {
       w.svgPieTimer = function(props) {
 
         var element = props.element,
-          duration = 1000,
+          duration = 180000,
           n = 1;
 
         var end = Date.now() + duration * n,
@@ -125,18 +125,14 @@ function closeRoom() {
     type: 'put',
     url: window.location.href,
     success: function(choice) {
-      showChoice(choice);
+      showChoice(choice.title);
     }
   });
 }
 
 function showChoice(choice) {
-  //get all choices and find one matching choice
-  //color this green, color all others red
- // var choices = $('#choices').find('h5').map(function() { return $(this).text() });
  choices = $('#choices').find('h5')
- chosen = choices.filter(function() { return parseInt($(this).text()) === choice})
- debugger;
+ chosen = choices.filter(function() { return $(this).text() === choice})
  choices.parent().addClass('red-text text-lighten-4 strikethrough')
  chosen.parent().removeClass('red-text text-lighten-4 strikethrough').addClass('green-text text-lighten-1 bold')
 }

@@ -37,7 +37,7 @@ class RoomsController < ApplicationController
     choice.update!(chosen: true)
 
     if request.xhr?
-      respond_with choice.title
+      respond_with choice, json: choice
     else
       redirect_to room_path(room)
     end
