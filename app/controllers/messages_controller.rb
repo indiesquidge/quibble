@@ -12,9 +12,8 @@ class MessagesController < ApplicationController
   def create
     message = Message.create(body: params[:message][:body],
                              room_id: params[:message][:room_id])
-    room = message.room
-
     respond_with message
-    $redis.publish room.slug, message.to_json
+
+    $redis.publish "main_channel", message.to_json
   end
 end
