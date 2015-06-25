@@ -21,3 +21,6 @@ public/assets
 
 # Ignore RubyMine nonsense
 .idea/
+
+# Ignore snapshots of database from Redis
+dump.rdb
