@@ -25,7 +25,6 @@ function createMessageOnSubmission() {
   $submit.on('click', function (event) {
     event.preventDefault();
     createMessage();
-    $('form')[0].reset();
   });
 }
 
@@ -37,9 +36,9 @@ function createMessage() {
 }
 
 function appendMessage(data) {
-  console.log(data);
   var messageMarkup = renderMessage(data);
   $('.messages tbody').append(messageMarkup);
+  $('form')[0].reset();
 }
 
 function renderMessage(data) {
