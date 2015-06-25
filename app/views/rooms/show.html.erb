@@ -1,63 +1,74 @@
 <div class="container">
-  <div class="row">
-    <div class="col s12" id="room-show">
-      <h2 class="center-align"><%= @room.name %></h2>
-    </div> <!-- room-show -->
-  </div> <!-- row -->
+<div class="row">
+  <div class="col s12" id="room-show">
+    <h2 class="center-align"><%= @room.name %></h2>
+  </div> <!-- room-show -->
+</div> <!-- row -->
 
-  <div class="row">
-    <div class="col m8 s12 messages">
-      <table class="hoverable" style="table-layout: fixed; width: 100%">
-        <tbody>
-          <div id="recent-messages">
-            <% @messages.each do |message| %>
-              <tr>
-                <td style="word-wrap: break-word"><%= message.body %></td>
-              </tr>
-            <% end %>
-          </div> <!-- recent-messages -->
-        </tbody>
-      </table>
+<div class="row">
+    <div class="col s5" id="timer-clock">
+      <svg viewbox="0 0 252 252">
+        <path id="border" transform="translate(125,125)"/>
+        <path id="loader" transform="translate(125,125) scale(.84)"/>
+        <circle id="full-pie" cx="125" cy="125" r="116">
+      </svg>
+    </div>
 
-      <div id="new-message" class="input-field col s12">
-        <% if @room.closed? %>
-          <h4>This thread has been closed.</h4>
-          <h5>No new messages may be posted.</h5>
-        <% else %>
-          <%= form_for :message, url: messages_path do |f| %>
-            <%= f.text_field :body %>
-            <%= hidden_field_tag "room_id", @room.id %>
-            <%= f.submit "Create message", class: "btn col m6 s12" %>
+  <div class="col s5 messages">
+    <table class="hoverable" style="table-layout: fixed; width: 100%">
+      <tbody>
+        <div id="recent-messages">
+          <% @messages.each do |message| %>
+            <tr>
+              <td style="word-wrap: break-word"><%= message.body %></td>
+            </tr>
           <% end %>
-        <% end %>
-      </div> <!-- new-message -->
-    </div> <!-- messages -->
+        </div> <!-- recent-messages -->
+      </tbody>
+    </table>
 
-    <div class="col m3 offset-m1 s12 room-details">
-      <div class="row">
-        <div class="room-status">
-          <p class="center-align">Room status: <b><%= @room.display_current_state %></b></p>
+    <div id="new-message" class="input-field col s12">
+      <% if @room.closed? %>
+        <h4>This thread has been closed.</h4>
+        <h5>No new messages may be posted.</h5>
+      <% else %>
+        <%= form_for :message, url: messages_path do |f| %>
+          <%= f.text_field :body %>
+          <%= hidden_field_tag "room_id", @room.id %>
+          <%= f.submit "Create message", id: "submit-msg", class: "btn col m6 s12" %>
+        <% end %>
+      <% end %>
+    </div> <!-- new-message -->
+  </div> <!-- messages -->
+
+  <div class="col s2 room-details">
+    <div class="row">
+      <div class="room-status">
+        <p class="center-align">Room status: </p><b>
+          <div id="state-of-room">
+            <p id=<%= @room.state %> class="center-align"><%= @room.display_current_state %></p>
+          </div></b>
           <% if !@room.closed? %>
             <%= current_user.close_topic(@room) %>
           <% end %>
-        </div> <!-- room-status -->
-      </div> <!-- row -->
+      </div> <!-- room-status -->
+    </div> <!-- row -->
 
-      <div id="choices">
-        <h4>Choices:</h4>
-        <% @room.choices.each do |choice| %>
-          <div class="<%=choice.title%>">
-            <% if @room.closed? %>
-              <div class="<%=choice.chosen_display%>">
-                <h5><%= choice.title %></h5>
-              </div>
-            <% else %>
+    <div id="choices">
+      <h4 class="center-align">Choices:</h4>
+      <% @room.choices.each do |choice| %>
+        <div class="<%=choice.title%> center-align">
+          <% if @room.closed? %>
+            <div class="<%=choice.chosen_display%>">
               <h5><%= choice.title %></h5>
-            <% end %>
-          </div>
-        <% end %>
-      </div> <!-- choices -->
-    </div> <!-- room-details -->
+            </div>
+          <% else %>
+            <h5><%= choice.title %></h5>
+          <% end %>
+        </div>
+      <% end %>
+    </div> <!-- choices -->
+  </div> <!-- room-details -->
+</div> <!-- row -->
 
-  </div> <!-- row -->
 </div> <!-- container -->

@@ -1,3 +1,26 @@
 .strikethrough {
   text-decoration: line-through;
 }
+
+svg {
+  display: block;
+  margin: 50px auto;
+  margin-top:0px;
+}
+
+#loader {
+  fill: #4caf50; }
+
+#border {
+  fill: #81c784 }
+
+#full-pie {
+  fill:#4caf50;
+  stroke:#81c784;
+  stroke-width:18;
+  display:none;
+}
+
+#state-th {
+  width:300px;
+}

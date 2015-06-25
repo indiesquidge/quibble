@@ -8,6 +8,17 @@ RSpec.describe Room do
     expect(room).to be_valid
   end
 
+  context "to save state of timer animation" do
+    it "has an timer border and loader attribute" do
+      room = Room.new(name: "test")
+      room.choices.build(title: "some trivial choice")
+      room.choices.build(title: "some other trivial choice")
+      path = "M 0 0 v -125 A 125 125 1 0 1 0 -125 z"
+      expect(room.timer_border = path).to be
+      expect(room.timer_loader = path).to be
+    end
+  end
+
   context("slug attribute") do
     it "parameterizes the name for the slug" do
       room = Room.new(name: "hello world or poopin")
