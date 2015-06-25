@@ -1,0 +1,13 @@
+<% if @room.closed? %>
+  <h4>This thread has been closed.</h4>
+  <h5>No new messages may be posted.</h5>
+  <% if !@room.choices.find_by(chosen: true) %>
+    <h5>Pick the Winning Choice</h5>
+    <ul>
+      <%= form_for :choice, url: "/rooms/" + @room.slug + "/choices", html: { method: :put } do |f| %>
+        <li><%= collection_radio_buttons(:room, :choices, @room.choices, :id, :title) %></li>
+        <%= f.submit id: "manual-submit", class: "btn" %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

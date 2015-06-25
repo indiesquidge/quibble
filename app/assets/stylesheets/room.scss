@@ -3,11 +3,11 @@
 }
 
 #timer-clock {
-  width: 100%;
+  width: 252px;
+  margin:0px;
 }
 
 svg {
-  display: block;
   margin: 50px auto;
   margin-top:0px;
 }
@@ -18,9 +18,10 @@ svg {
 #border {
   fill: #81c784 }
 
+
 #full-pie {
-  fill:#4caf50;
-  stroke:#81c784;
+  fill:#ff5252;
+  stroke:#f44336;
   stroke-width:18;
   display:none;
 }
