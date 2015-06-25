@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
 
   def index
     $room = Room.find_by(slug: params[:slug])
-    respond_with Message.where(room_id: room.id)
+    respond_with Message.where(room_slug: $room.slug)
   end
 
   def create
